@@ -82,20 +82,17 @@ export const FileUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "ima
                     <input id={inputId} type="file" onChange={onInputChange} accept={acceptedTypesToString()}/>
                 </div>
             </div>
-            
             {
                 !(file === null)
                     &&
-                <img
-                    src={URL.createObjectURL(file)}
-                    alt="uploadedImage"
-                    style={{maxWidth : "40%", marginBottom : "1em"}}
-                />
-            }
-            {
-                !(file === null)
-                    &&
-                <button className="btn btn-outline-danger" onClick={()=>{removeFile();}}>Remove file</button>
+                <div style={{display:"flex", flexDirection:"row", justifyContent:"space-evenly", alignItems:"center"}}>
+                    <img
+                        src={URL.createObjectURL(file)}
+                        alt="uploadedImage"
+                        style={{maxWidth : "30%", marginBottom : "1em", border:"1px solid blue"}}
+                    />
+                    <button className="btn btn-outline-danger" onClick={()=>{removeFile();}}>Remove file</button>
+                </div>
             }
             
         </div>
