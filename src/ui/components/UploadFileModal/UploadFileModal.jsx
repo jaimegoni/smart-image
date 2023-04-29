@@ -50,8 +50,7 @@ export const UploadFileModal = ({setIsModalActive})=>{
             if (isInformationUploaded()){
                 setImageInfo({
                     imageName,
-                    b64image,
-                    status:"selectAxis"
+                    b64image
                 });
             }
             else{
