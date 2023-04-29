@@ -1,8 +1,10 @@
 
-import { useEffect, useState } from "react";
-import { getStoredChartByKey } from "../../core/services/ChartsRegister/GetStoredChartByKey";
-import { getStoredChartsKeys } from "../../core/services/ChartsRegister/GetStoredChartsKeys";
-import { ChartCard } from "../components/ChartCard/ChartCard";
+import { useState } from "react";
+
+import { getStoredImageByKey } from "../../core/services/ImagesRegister/GetStoredImageByKey";
+import { getStoredImagesKeys } from "../../core/services/ImagesRegister/GetStoredImagesKeys";
+
+import { ImageCard } from "../components/ImageCard/ImageCard";
 import { StandardView } from "../templates/StandardView/StandardView";
 import { UploadFileModal } from "../components/UploadFileModal/UploadFileModal";
 
@@ -10,12 +12,8 @@ export const HomeView = ()=>{
 
     const [modalActive, setModalActive] = useState(false);
 
-    const chartKeys = getStoredChartsKeys();
-
-    useEffect(()=>{
-        modalActive ? console.log("Modal is: active" ) : console.log("Modal is: NOT active" )
-    },[modalActive])
-
+    const imagesKeys = getStoredImagesKeys();
+    
     return(
         <StandardView>
             <h1>Welcome</h1>
@@ -24,14 +22,14 @@ export const HomeView = ()=>{
             </div>
             <div style={imagesPoolDivStyle}>
                 {
-                    chartKeys.length > 0
+                    imagesKeys.length > 0
                             &&
-                    chartKeys.map(
+                    imagesKeys.map(
                         (key)=>{
                             return(
-                                <ChartCard
+                                <ImageCard
                                     key={key}
-                                    chartInfo={getStoredChartByKey(key)}
+                                    imageInfo={getStoredImageByKey(key)}
                                 />
                             );
                         }

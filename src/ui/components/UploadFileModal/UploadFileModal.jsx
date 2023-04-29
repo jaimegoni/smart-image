@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import {PropTypes} from 'prop-types'
 
-import { storeNewChart } from "../../../core/services/ChartsRegister/StoreNewChart";
+import { storeNewImage } from "../../../core/services/ImagesRegister/StoreNewImage";
 import { imageToBase64 } from "../../../core/services/ImageToBase64/ImageToBase64";
 
 import { FileUploader } from "../FileUploader/FileUploader";
@@ -27,8 +27,8 @@ export const UploadFileModal = ({setIsModalActive})=>{
     }
 
     const toNextStep = ()=>{
-        const chartKey = storeNewChart(imageInfo);
-        navigate("/selectAxis/" + chartKey);
+        const imageKey = storeNewImage(imageInfo);
+        navigate("/home/");
     }
 
     const getClickedElementId = (event)=>{

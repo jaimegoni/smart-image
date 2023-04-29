@@ -1,1 +1,1 @@
-export const storedImagesInfoKey = "ChartExtractorMemory";
+export const storedImagesInfoKey = "ImageExtractorMemory";

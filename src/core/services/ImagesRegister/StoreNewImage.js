@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 
 import { getObject } from "../../infrastructure/MemoryStorage/GetObject";
 import { saveObject } from "../../infrastructure/MemoryStorage/SaveObject";
-import { getUniqueRandomKey } from "./GetUniqueRandomImageKey";
+import { getUniqueRandomImageKey } from './GetUniqueRandomImageKey';
 
 import { storedImagesInfoKey } from './init';
 
 export const storeNewImage = (image)=>{
 
-    const newImageKey = getUniqueRandomKey();
+    const newImageKey = getUniqueRandomImageKey();
 
     let storedImages = getObject(storedImagesInfoKey);
     
