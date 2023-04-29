@@ -15,7 +15,7 @@ export const ImageCard = ({imageInfo})=>{
         <div className="image__card--div">
             <button onClick={onDeleteImage} className="image__card--del">🗑</button>
             <a
-                href={`/${imageInfo.status}/${imageInfo.key}`}
+                href={`/${imageInfo.key}`}
                 className="image__card--a"
             >
                 <p style={{margin:"3px"}}>{imageInfo.imageName}</p>

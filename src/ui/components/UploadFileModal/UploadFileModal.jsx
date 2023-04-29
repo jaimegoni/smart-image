@@ -28,7 +28,7 @@ export const UploadFileModal = ({setIsModalActive})=>{
 
     const toNextStep = ()=>{
         const imageKey = storeNewImage(imageInfo);
-        navigate("/home/");
+        navigate("/faq");
     }
 
     const getClickedElementId = (event)=>{

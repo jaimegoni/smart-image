@@ -11,14 +11,14 @@ export const deleteImageByKey = (imageKey) =>{
 
     localStorage.removeItem(imageKey);
 
-    const imageKeys = storedImagesInfo.imageKeys.filter(key => key !== imageKey);
+    const imagesKeys = storedImagesInfo.imagesKeys.filter(key => key !== imageKey);
 
     saveObject(
             storedImagesInfoKey,
             {
                 ...storedImagesInfo,
                 lastModificationDate : new Date().toDateString(),
-                imageKeys
+                imagesKeys
             }
         );
     

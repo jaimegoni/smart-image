@@ -19,7 +19,7 @@ export const deleteStoredImages = ()=>{
             {
                 ...storedImagesInfo,
                 lastModificationDate : new Date().toDateString(),
-                imageKeys: []
+                imagesKeys: []
             }
         );
     return;

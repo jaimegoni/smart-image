@@ -9,7 +9,7 @@ import { storedImagesInfoKey } from './init';
 
 export const storeNewImage = (image)=>{
 
-    const newImageKey = getUniqueRandomImageKey();
+    const newImageKey = "smartImg_" + getUniqueRandomImageKey();
 
     let storedImages = getObject(storedImagesInfoKey);
     
