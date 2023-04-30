@@ -50,7 +50,8 @@ export const UploadFileModal = ({setIsModalActive})=>{
             if (isInformationUploaded()){
                 setImageInfo({
                     imageName,
-                    b64image
+                    b64image,
+                    imageNotes : []
                 });
             }
             else{

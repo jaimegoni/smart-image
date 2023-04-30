@@ -1,4 +1,6 @@
 
+import "./StandardView.css"
+
 import { NavigationBar } from "../NavigationBar/NavigationBar";
 
 export const StandardView = ({children})=>{
@@ -6,7 +8,7 @@ export const StandardView = ({children})=>{
     return(
         <>
             <NavigationBar/>
-            <div style={{margin:"2em"}}>
+            <div className="standardview__content--div">
                 {children}
             </div>
         </>

@@ -1,12 +1,14 @@
 
 import { useState } from "react";
 
-import { getStoredImageByKey } from "../../core/services/ImagesRegister/GetStoredImageByKey";
-import { getStoredImagesKeys } from "../../core/services/ImagesRegister/GetStoredImagesKeys";
+import "./HomeView.css"
 
-import { ImageCard } from "../components/ImageCard/ImageCard";
-import { StandardView } from "../templates/StandardView/StandardView";
-import { UploadFileModal } from "../components/UploadFileModal/UploadFileModal";
+import { getStoredImageByKey } from "../../../core/services/ImagesRegister/GetStoredImageByKey";
+import { getStoredImagesKeys } from "../../../core/services/ImagesRegister/GetStoredImagesKeys";
+
+import { ImageCard } from "../../components/ImageCard/ImageCard";
+import { StandardView } from "../../templates/StandardView/StandardView";
+import { UploadFileModal } from "../../components/UploadFileModal/UploadFileModal";
 
 export const HomeView = ()=>{
 
@@ -17,10 +19,10 @@ export const HomeView = ()=>{
     return(
         <StandardView>
             <h1>Welcome</h1>
-            <div style={actionsDivStyle}>
+            <div className="pool__actions--div">
                 <button className="btn btn-primary" onClick={()=>{setModalActive(!modalActive)}}>Add new image</button>
             </div>
-            <div style={imagesPoolDivStyle}>
+            <div className="images__pool--div">
                 {
                     imagesKeys.length > 0
                             &&
@@ -45,16 +47,4 @@ export const HomeView = ()=>{
             }
         </StandardView>
     )
-}
-
-const imagesPoolDivStyle = {
-    display:"flex",
-    flexDirection:"row",
-    justifyContent:"flex-start",
-    alignItems:"stretch"
-};
-
-const actionsDivStyle = {
-    ...imagesPoolDivStyle,
-    padding: "0.5em",
 }
