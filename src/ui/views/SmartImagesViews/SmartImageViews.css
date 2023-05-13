@@ -2,8 +2,36 @@
 .view__containter--div{
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: start;
+    justify-content: space-between;
+    align-items: stretch;
 
-    
+    border: 2px solid lightgray;
+    border-radius: 5px;
+
+    margin-top: 2em;
+    margin-right: 2em;
 }
+
+.image__container--div{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+
+    flex-grow: 1;
+}
+
+
+.smart__image--img{
+    width: 95%;
+    margin: 0.5em;
+    padding: 0.2em;
+    border: 1px solid blue;
+}
+
+
+.image__filter--input:focus{
+    border: 2px solid blue;
+    border-radius: 3px;
+}
+

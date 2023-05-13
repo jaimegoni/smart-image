@@ -1,5 +1,6 @@
 
-import "./StandardView.css"
+import "./StandardView.css";
+import { PropTypes } from "prop-types";
 
 import { NavigationBar } from "../NavigationBar/NavigationBar";
 

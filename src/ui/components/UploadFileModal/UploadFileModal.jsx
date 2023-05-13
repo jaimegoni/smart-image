@@ -2,7 +2,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import {PropTypes} from 'prop-types'
+import {PropTypes} from 'prop-types';
+
+import "./UploadFileModal.css";
 
 import { storeNewImage } from "../../../core/services/ImagesRegister/StoreNewImage";
 import { imageToBase64 } from "../../../core/services/ImageToBase64/ImageToBase64";
@@ -28,7 +30,7 @@ export const UploadFileModal = ({setIsModalActive})=>{
 
     const toNextStep = ()=>{
         const imageKey = storeNewImage(imageInfo);
-        navigate("/faq");
+        navigate("/smartImage/"+imageKey);
     }
 
     const getClickedElementId = (event)=>{
@@ -78,7 +80,7 @@ export const UploadFileModal = ({setIsModalActive})=>{
                 <div className="modal-content" style={{borderColor:"blue"}}>
                     <div className="modal-header">
                         <h5 className="modal-tilte">Upload image</h5>
-                        <button type="button" className="close" onClick={()=>{setIsModalActive(false)}} style={{border:"none"}}>
+                        <button type="button" className="close close__button" onClick={()=>{setIsModalActive(false)}}>
                             <span >x</span>
                         </button>
                     </div>
