@@ -8,6 +8,7 @@ import "./UploadFileModal.css";
 
 import { storeNewImage } from "../../../core/services/ImagesRegister/StoreNewImage";
 import { imageToBase64 } from "../../../core/services/ImageToBase64/ImageToBase64";
+import { extractOriginalImageSize } from "../../../core/services/ExtractOriginalImageSize/ExtractOriginalImageSize";
 
 import { FileUploader } from "../FileUploader/FileUploader";
 
@@ -50,9 +51,14 @@ export const UploadFileModal = ({setIsModalActive})=>{
     useEffect(()=>{
 
             if (isInformationUploaded()){
+
+                const { imageWidth, imageHeight } = extractOriginalImageSize(b64image);
+
                 setImageInfo({
                     imageName,
                     b64image,
+                    imageWidth,
+                    imageHeight,
                     imageNotes : []
                 });
             }

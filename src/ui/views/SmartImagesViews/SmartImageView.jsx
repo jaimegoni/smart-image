@@ -6,7 +6,6 @@ import "./SmartImageViews.css"
 import { getStoredImageByKey } from "../../../core/services/ImagesRegister/GetStoredImageByKey";
 import { StandardView } from "../../templates/StandardView/StandardView";
 import { SmartImageFilter } from "../../components/SmartImageFilter/SmartImageFilter";
-import { getImageInfo } from "../../../core/services/GetImageInfo/GetImageInfo";
 
 
 export const SmartImageView = ()=>{
@@ -21,26 +20,16 @@ export const SmartImageView = ()=>{
     
     const { imageKey } = useParams();
 
+
     const [imageData, setImageData] = useState({});
-    const [{imageWidth, imageHeight}, setImageInfo] = useState({imageWidth: 0, imageHeight: 0})
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(
         ()=>{
             setImageData(getStoredImageByKey(imageKey));
+            setIsLoading(false);
         }
-        ,[])
-
-    useEffect(()=>{
-        if( (Object.keys(imageData).length > 0 )){
-
-            if(!(imageData.imageName === null)){
-                setImageInfo(getImageInfo(imageData.b64image));
-                setIsLoading(false);
-            }
-        }
-
-    },[imageData])
+        ,[imageKey])
 
     return(
         <StandardView>
