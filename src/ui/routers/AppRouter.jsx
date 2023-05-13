@@ -3,6 +3,7 @@ import { FaqView } from "../views/FaqView";
 import { HomeView } from "../views/HomeView/HomeView";
 import { NoRouteView } from "../views/NoRouteView";
 import { SmartImageView } from "../views/SmartImagesViews/SmartImageView";
+import { SmartImageConfigView } from "../views/SmartImagesViews/SmartImageConfigView";
 
 export const AppRouter = ()=>{
 
@@ -12,7 +13,7 @@ export const AppRouter = ()=>{
         <Route path="/faq" element={<FaqView/>}/>
         <Route path="*" element={<NoRouteView/>}/>
         <Route path="smartImage/:imageKey" element={<SmartImageView/>}/>
-        <Route path="smartImageConfiguration/:imageKey" element={<SmartImageView/>}/>
+        <Route path="smartImageConfiguration/:imageKey" element={<SmartImageConfigView/>}/>
     </Routes>
     );
 }
