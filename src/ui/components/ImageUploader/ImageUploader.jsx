@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./FileUploader.css"
+import "./ImageUploader.css"
 
-export const FileUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "image/png"]})=>{
+export const ImageUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "image/png"]})=>{
 
     const inputId = "dropzoneInput"
 
@@ -77,7 +77,7 @@ export const FileUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "ima
                 onDragLeave={handleOnDragLeave}
             >
                 <div className="dropzone__components--div">
-                    <p>Drag and drop files</p>
+                    <p>Drag and drop image</p>
                     <p>or</p>
                     <input id={inputId} type="file" onChange={onInputChange} accept={acceptedTypesToString()}/>
                 </div>
@@ -91,7 +91,7 @@ export const FileUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "ima
                         alt="uploadedImage"
                         style={{maxWidth : "30%", marginBottom : "1em", border:"1px solid blue"}}
                     />
-                    <button className="btn btn-outline-danger" onClick={()=>{removeFile();}}>Remove file</button>
+                    <button className="btn btn-outline-danger" onClick={()=>{removeFile();}}>Remove image</button>
                 </div>
             }
             

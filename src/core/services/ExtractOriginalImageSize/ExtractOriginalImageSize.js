@@ -4,6 +4,7 @@ export const extractOriginalImageSize = (imageUrl)=>{
 
     image.src = imageUrl;
 
+
     return (
         {
             imageWidth: image.naturalWidth,

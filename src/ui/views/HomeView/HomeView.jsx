@@ -8,7 +8,7 @@ import { getStoredImagesKeys } from "../../../core/services/ImagesRegister/GetSt
 
 import { ImageCard } from "../../components/ImageCard/ImageCard";
 import { StandardView } from "../../templates/StandardView/StandardView";
-import { UploadFileModal } from "../../components/UploadFileModal/UploadFileModal";
+import { UploadImageModal } from "../../components/UploadImageModal/UploadImageModal";
 
 export const HomeView = ()=>{
 
@@ -41,7 +41,7 @@ export const HomeView = ()=>{
             {
                 modalActive
                     &&
-                <UploadFileModal
+                <UploadImageModal
                     setIsModalActive = {setModalActive}
                 /> 
             }

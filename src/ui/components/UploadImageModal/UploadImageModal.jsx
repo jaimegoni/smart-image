@@ -4,15 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 import {PropTypes} from 'prop-types';
 
-import "./UploadFileModal.css";
+import "./UploadImageModal.css";
 
 import { storeNewImage } from "../../../core/services/ImagesRegister/StoreNewImage";
 import { imageToBase64 } from "../../../core/services/ImageToBase64/ImageToBase64";
 import { extractOriginalImageSize } from "../../../core/services/ExtractOriginalImageSize/ExtractOriginalImageSize";
 
-import { FileUploader } from "../FileUploader/FileUploader";
+import { ImageUploader } from "../ImageUploader/ImageUploader";
 
-export const UploadFileModal = ({setIsModalActive})=>{
+export const UploadImageModal = ({setIsModalActive})=>{
 
     const [imageName, setImageName] = useState("");
     const [file, setFile] = useState(null);
@@ -95,9 +95,9 @@ export const UploadFileModal = ({setIsModalActive})=>{
                         <br/>
                         <input type="text" placeholder="Image name" onChange={(event) => {setImageName(event.target.value);}} style={{minWidth : "30%"}}/>
                         <br/><br/>
-                        <h2> Choose a file</h2>
+                        <h2> Choose an image</h2>
                         <br/>
-                        <FileUploader
+                        <ImageUploader
                             file={file}
                             setFile={setFile}
                         />
@@ -116,6 +116,6 @@ export const UploadFileModal = ({setIsModalActive})=>{
     )
 }
 
-UploadFileModal.propTypes = {
+UploadImageModal.propTypes = {
     setIsModalActive : PropTypes.func.isRequired,
 }
