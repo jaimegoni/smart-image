@@ -16,12 +16,6 @@ import { SmartImageFilter } from "../../components/SmartImageFilter/SmartImageFi
 export const SmartImageView = ()=>{
 
     const imgContainerId = "smartImageImg";
-
-    const imageNotes = [
-        { x0: 0, y0:0, x1:50, y1:50, text:"asdf", id:"asdf"},
-        { x0: 60, y0:60, x1:100, y1:100, text:"querty", id:"querty"},
-        { x0: 120, y0:120, x1:150, y1:150, text:"kas", id:"kas"}
-    ];
     
     const { imageKey } = useParams();
 
