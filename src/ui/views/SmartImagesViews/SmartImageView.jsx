@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import "./SmartImageViews.css"
 
 import { getStoredImageByKey } from "../../../core/services/ImagesRegister/GetStoredImageByKey";
-import { calculateImageDisplayDimensions } from "../../../core/services/CalculateImageDisplayDimensions/CalculateImageDisplayDimensions";
+import { calculateImageDisplayDimensions } from "../../../core/services/RelativePositioningCalculations/CalculateImageDisplayDimensions";
 
 import { StandardView } from "../../templates/StandardView/StandardView";
 import { SmartImageFilter } from "../../components/SmartImageFilter/SmartImageFilter";
@@ -30,9 +30,7 @@ export const SmartImageView = ()=>{
     const [{imageDisplayWidth, imageDisplayHeight} , setDisplayDimensions] = useState({imageDisplayWidth : 0, imageDisplayHeight : 0})
 
     const onResizeActions = ()=>{
-        setScreenWidth(screen.width);
-
-        // console.log(screen.width);
+            setScreenWidth(screen.width);
     }
 
     useEffect(
@@ -49,19 +47,23 @@ export const SmartImageView = ()=>{
             setImageData(getStoredImageByKey(imageKey));
             setIsImportingImage(false);
         }
-        ,[imageKey])
+        ,[imageKey]
+    )
     
     useEffect(()=>{
-        if(!(isImportingImage)){
-            setDisplayDimensions(calculateImageDisplayDimensions(screenWidth, imageData.imageWidth, imageData.imageHeight));
-            setIsLoading(false);
+            if(!(isImportingImage)){
+                setDisplayDimensions(calculateImageDisplayDimensions(screenWidth, imageData.imageWidth, imageData.imageHeight));
+                setIsLoading(false);
+            }
         }
-    }
-    ,[isImportingImage, screenWidth])
+        ,[isImportingImage, screenWidth]
+    )
     
     useEffect(()=>{
         console.log(`imageDisplayWidth=${imageDisplayWidth}, imageDisplayHeight=${imageDisplayHeight}`);
-    },[imageDisplayWidth, imageDisplayHeight])
+        }
+        ,[imageDisplayWidth, imageDisplayHeight]
+    )
     
 
     return(
