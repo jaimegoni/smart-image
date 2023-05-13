@@ -17,13 +17,14 @@ export const UploadImageModal = ({setIsModalActive})=>{
     const [imageName, setImageName] = useState("");
     const [file, setFile] = useState(null);
     const [b64image, setB64image] = useState("");
+    const [{imageWidth, imageHeight}, setImageDimensions] = useState({imageWidth:0, imageHeight:0})
 
     const [imageInfo, setImageInfo] = useState ({});
 
     const navigate = useNavigate();
 
     const isInformationUploaded = ()=>{
-        if (!(imageName === "") && !(file === null) && !(b64image==="")){
+        if (!(imageName === "") && !(file === null) && !(b64image==="") && !(imageWidth===0) && !(imageHeight===0)){
             return true;
         }
         return false;
@@ -40,6 +41,7 @@ export const UploadImageModal = ({setIsModalActive})=>{
         }
     }
 
+
     useEffect(
         () =>{
             if(!(file === null)){
@@ -47,12 +49,20 @@ export const UploadImageModal = ({setIsModalActive})=>{
             }
         }
         , [file]);
-    
+
+    useEffect(()=>{
+
+        if (!(b64image === "")){
+            extractOriginalImageSize(b64image).then((imageDimensions)=>{
+                setImageDimensions(imageDimensions);
+            })
+        }
+
+    },[b64image])
+
     useEffect(()=>{
 
             if (isInformationUploaded()){
-
-                const { imageWidth, imageHeight } = extractOriginalImageSize(b64image);
 
                 setImageInfo({
                     imageName,
@@ -63,10 +73,10 @@ export const UploadImageModal = ({setIsModalActive})=>{
                 });
             }
             else{
-                setImageInfo({})
+                setImageInfo({});
             }
         }
-        ,[imageName, b64image]);
+        ,[imageName, imageWidth, imageHeight]);
     
     return(
         <div
