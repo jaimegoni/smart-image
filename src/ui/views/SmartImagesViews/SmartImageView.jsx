@@ -4,8 +4,11 @@ import { useParams } from "react-router-dom";
 import "./SmartImageViews.css"
 
 import { getStoredImageByKey } from "../../../core/services/ImagesRegister/GetStoredImageByKey";
+import { calculateImageDisplayDimensions } from "../../../core/services/CalculateImageDisplayDimensions/CalculateImageDisplayDimensions";
+
 import { StandardView } from "../../templates/StandardView/StandardView";
 import { SmartImageFilter } from "../../components/SmartImageFilter/SmartImageFilter";
+
 
 
 export const SmartImageView = ()=>{
@@ -20,16 +23,46 @@ export const SmartImageView = ()=>{
     
     const { imageKey } = useParams();
 
-
     const [imageData, setImageData] = useState({});
+    const [isImportingImage, setIsImportingImage] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
+    const [screenWidth, setScreenWidth] = useState(screen.width);
+    const [{imageDisplayWidth, imageDisplayHeight} , setDisplayDimensions] = useState({imageDisplayWidth : 0, imageDisplayHeight : 0})
+
+    const onResizeActions = ()=>{
+        setScreenWidth(screen.width);
+
+        // console.log(screen.width);
+    }
+
+    useEffect(
+        ()=>{
+            window.addEventListener('resize', onResizeActions);
+
+            return(window.removeEventListener("beforeunload", onResizeActions));
+        }
+        ,[]
+    )
 
     useEffect(
         ()=>{
             setImageData(getStoredImageByKey(imageKey));
-            setIsLoading(false);
+            setIsImportingImage(false);
         }
         ,[imageKey])
+    
+    useEffect(()=>{
+        if(!(isImportingImage)){
+            setDisplayDimensions(calculateImageDisplayDimensions(screenWidth, imageData.imageWidth, imageData.imageHeight));
+            setIsLoading(false);
+        }
+    }
+    ,[isImportingImage, screenWidth])
+    
+    useEffect(()=>{
+        console.log(`imageDisplayWidth=${imageDisplayWidth}, imageDisplayHeight=${imageDisplayHeight}`);
+    },[imageDisplayWidth, imageDisplayHeight])
+    
 
     return(
         <StandardView>
@@ -42,26 +75,22 @@ export const SmartImageView = ()=>{
                     <div>
                         <h2>Image name: {imageData.imageName}</h2>
                     </div>
-                    <div className="view__containter--div">
-                        <div className="image__container--div">
-                            <div
-                                id = {imgContainerId}
-                                className="smart__image--img"
-                                style={
-                                    {
-                                        backgroundImage : `url(${imageData.b64image})`,
-                                        backgroundSize : "contain",
-                                        backgroundRepeat : "no-repeat",
-                                        height : "90vh"
-                                    }
+                    <div className="image__container--div">
+                        <div
+                            id = {imgContainerId}
+                            className="smart__image--img"
+                            style={
+                                {
+                                    backgroundImage : `url(${imageData.b64image})`,
+                                    backgroundSize : "contain",
+                                    backgroundRepeat : "no-repeat",
+                                    width : `${imageDisplayWidth}px`,
+                                    height : `${imageDisplayHeight}px`
                                 }
-                            >
+                            }
+                        >
 
-                            </div>
                         </div>
-                        <SmartImageFilter
-                            imageNotes = { imageNotes }
-                        />
                     </div>
                 </>
                 
