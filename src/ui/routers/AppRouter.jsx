@@ -12,6 +12,7 @@ export const AppRouter = ()=>{
         <Route path="/faq" element={<FaqView/>}/>
         <Route path="*" element={<NoRouteView/>}/>
         <Route path="smartImage/:imageKey" element={<SmartImageView/>}/>
+        <Route path="smartImageConfiguration/:imageKey" element={<SmartImageView/>}/>
     </Routes>
     );
 }

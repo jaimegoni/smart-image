@@ -1,4 +1,6 @@
 
+import { Link } from "react-router-dom"
+
 import "./NavigationBar.css"
 
 export const NavigationBar = ()=>{
@@ -12,8 +14,8 @@ export const NavigationBar = ()=>{
             </div>
 
             <div className="navigation__bar--div">
-                <a className="navigation__link--a" href="/" target="_self">Home</a>
-                <a className="navigation__link--a" href="/faq" target="_self">FAQ</a>
+                <Link className="navigation__link--a" to="/" target="_self">Home</Link>
+                <Link className="navigation__link--a" to="/faq" target="_self">FAQ</Link>
             </div>
     </nav>
 )

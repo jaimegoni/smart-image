@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+
 import "./SmartImageViews.css"
 
 import { getStoredImageByKey } from "../../../core/services/ImagesRegister/GetStoredImageByKey";
@@ -74,8 +76,17 @@ export const SmartImageView = ()=>{
                 <p>Loading...</p>
                     :
                 <>
-                    <div>
+                    <div className="title__container--div">
                         <h2>Image name: {imageData.imageName}</h2>
+                    </div>
+                    <div className="actions__container--div">
+                        <Link to={`smartImage/${imageKey}`} className="btn btn-primary">
+                            View
+                        </Link>
+                        <Link to={`smartImageConfiguration/${imageKey}`} className="btn btn-outline-primary" style={{marginLeft : "1em"}}>
+                            Configuration
+                        </Link>
+
                     </div>
                     <div className="image__container--div">
                         <div

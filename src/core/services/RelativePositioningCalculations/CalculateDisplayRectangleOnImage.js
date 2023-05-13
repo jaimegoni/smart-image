@@ -1,5 +1,5 @@
-import { calculateDisplayPositionOnImage } from "../CalculateDisplayPositionOnImage/CalculateDisplayPositionOnImage"
-import { calculateRelativeWidthAndHeight } from "../CalculateRelativeWidthAndHeight/CalculateRelativeWidthAndHeight";
+import { calculateDisplayPositionOnImage } from "./CalculateDisplayPositionOnImage"
+import { calculateRelativeWidthAndHeight } from "./CalculateRelativeWidthAndHeight";
 
 export const calculateDisplayRectangleOnImage = (
         imageNaturalWidth,

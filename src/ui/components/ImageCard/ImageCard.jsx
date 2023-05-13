@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
+import "./ImageCard.css"
 
 import { deleteImageByKey } from "../../../core/services/ImagesRegister/DeleteImageByKey";
-import "./ImageCard.css"
 
 export const ImageCard = ({imageInfo})=>{
 
@@ -14,13 +16,13 @@ export const ImageCard = ({imageInfo})=>{
     return(
         <div className="image__card--div">
             <button onClick={onDeleteImage} className="image__card--del">🗑</button>
-            <a
-                href={`smartImage/${imageInfo.key}`}
+            <Link
+                to={`smartImage/${imageInfo.key}`}
                 className="image__card--a"
             >
                 <p style={{margin:"3px"}}>{imageInfo.imageName}</p>
                 <img src={imageInfo.b64image} alt={`img_${imageInfo.imageName}`} className="image__card--img"/>
-            </a>
+            </Link>
         </div>
     )
 }
