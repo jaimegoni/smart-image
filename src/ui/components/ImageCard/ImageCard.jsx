@@ -4,6 +4,8 @@ import "./ImageCard.css"
 
 import { deleteImageByKey } from "../../../core/services/ImagesRegister/DeleteImageByKey";
 
+import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
+
 export const ImageCard = ({imageInfo})=>{
 
     const onDeleteImage = ()=>{
@@ -14,15 +16,28 @@ export const ImageCard = ({imageInfo})=>{
     }
 
     return(
-        <div className="image__card--div">
-            <button onClick={onDeleteImage} className="image__card--del">🗑</button>
-            <Link
-                to={`smartImage/${imageInfo.key}`}
-                className="image__card--a"
-            >
-                <p style={{margin:"3px"}}>{imageInfo.imageName}</p>
-                <img src={imageInfo.b64image} alt={`img_${imageInfo.imageName}`} className="image__card--img"/>
-            </Link>
-        </div>
+        <>
+        {
+            imageInfo === null
+                    ?
+            <div className="image__card--div">
+                <ErrorMessage
+                    title="Error at ImageCard.jsx"
+                    content="Image data not found in localstorage"
+                />
+            </div>
+                    :
+            <div className="image__card--div">
+                <button onClick={onDeleteImage} className="image__card--del">🗑</button>
+                <Link
+                    to={`smartImage/${imageInfo.key}`}
+                    className="image__card--a"
+                >
+                    <p style={{margin:"3px"}}>{imageInfo.imageName}</p>
+                    <img src={imageInfo.b64image} alt={`img_${imageInfo.imageName}`} className="image__card--img"/>
+                </Link>
+            </div>
+        }
+    </>
     )
 }

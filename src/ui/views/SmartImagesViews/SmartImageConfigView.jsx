@@ -7,6 +7,7 @@ import { getStoredImageByKey } from "../../../core/services/ImagesRegister/GetSt
 
 import { StandardView } from "../../templates/StandardView/StandardView";
 import { SmartImageVisualization } from "../../components/SmartImageVisualization/SmartImageVisualization";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
 
 export const SmartImageConfigView = ()=>{
@@ -27,12 +28,23 @@ export const SmartImageConfigView = ()=>{
     )
 
     return(
-        <StandardView>
+            <StandardView>
             {
                 isLoading
-                    ?
+                    &&
                 <p>Loading...</p>
-                    :
+            }
+            {
+                (!isLoading && (imageData === null))
+                    &&
+                <ErrorMessage
+                    title="Error at SmartImageConfigView.jsx"
+                    content="Image data not found in localstorage"
+                />
+            }
+            {
+                (!isLoading && !(imageData === null))
+                    &&
                 <>
                     <div className="title__container--div">
                         <h2>Image name: {imageData.imageName}</h2>

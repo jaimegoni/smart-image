@@ -1,0 +1,40 @@
+
+.error__message--div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+
+    background-color: red;
+
+    padding: 0.5em;
+}
+
+.error__message--h1{
+    text-align: center;
+    color: white;
+}
+
+.error__title--div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+
+    background-color: lightcoral;
+
+    font-weight: bolder;
+
+    padding: 0.5em;
+}
+
+.error__title--h2{
+    text-align: center;
+}
+
+.error__content--div{
+    padding: 0.5em;
+    font-size: 2em;
+
+    text-align: center;
+}
