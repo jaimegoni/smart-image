@@ -15,8 +15,8 @@ export const useMouseClickPosition = (targetDivId)=>{
         if (clickedElementId === targetDivId){
             setInitialCoordinates(
                 {
-                    xInitial: Math.round(event.clientX),
-                    yInitial: Math.round(event.clientY),
+                    xInitial: Math.round(event.pageX),
+                    yInitial: Math.round(event.pageY),
                 }
             );
             setFinalCoordinates(
@@ -27,8 +27,8 @@ export const useMouseClickPosition = (targetDivId)=>{
             )
             setCurrentCoordinates(
                 {
-                    xCurrent: Math.round(event.clientX),
-                    yCurrent: Math.round(event.clientY)
+                    xCurrent: Math.round(event.pageX),
+                    yCurrent: Math.round(event.pageY)
                 }
             );
             isClicking = true;
@@ -39,8 +39,8 @@ export const useMouseClickPosition = (targetDivId)=>{
         if (isClicking){
             setFinalCoordinates(
                 {
-                    xFinal : Math.round(event.clientX),
-                    yFinal : Math.round(event.clientY)
+                    xFinal : Math.round(event.pageX),
+                    yFinal : Math.round(event.pageY)
                 }
             );
             setCurrentCoordinates(
@@ -58,8 +58,8 @@ export const useMouseClickPosition = (targetDivId)=>{
         if (isClicking){
             setCurrentCoordinates(
                 {
-                    xCurrent: Math.round(event.clientX),
-                    yCurrent: Math.round(event.clientY)
+                    xCurrent: Math.round(event.pageX),
+                    yCurrent: Math.round(event.pageY)
                 }
             );
         }

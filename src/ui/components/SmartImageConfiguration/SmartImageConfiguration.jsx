@@ -86,14 +86,14 @@ export const SmartImageConfiguration = ({imageData})=>{
                 }
             }
         >
-        {
-            draggedSquareStyle.display === "block"
-                &&
-            <div
-                className="dragged__square--div"
-                style={draggedSquareStyle}
-            ></div>
-        }
+            {
+                draggedSquareStyle.display === "block"
+                    &&
+                <div
+                    className="dragged__square--div"
+                    style={draggedSquareStyle}
+                ></div>
+            }
 
         </div>
     )
