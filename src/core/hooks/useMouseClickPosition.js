@@ -4,7 +4,8 @@ export const useMouseClickPosition = (targetDivId)=>{
 
     let isClicking = false;
 
-    const [{xInitial, yInitial, xFinal, yFinal}, setCoordinates] = useState({xInitial : 0, yInitial : 0, xFinal : 0, yFinal : 0});
+    const [{xInitial, yInitial}, setInitialCoordinates] = useState({xInitial : 0, yInitial : 0});
+    const [{xFinal, yFinal}, setFinalCoordinates] = useState({xFinal : 0, yFinal : 0});
     const [{xCurrent, yCurrent}, setCurrentCoordinates] = useState({xCurrent:0, yCurrent:0})
 
 
@@ -12,14 +13,18 @@ export const useMouseClickPosition = (targetDivId)=>{
 
         const clickedElementId = event.target.id;
         if (clickedElementId === targetDivId){
-            setCoordinates(
+            setInitialCoordinates(
                 {
                     xInitial: Math.round(event.clientX),
                     yInitial: Math.round(event.clientY),
-                    xFinal: 0,
-                    yFinal: 0
                 }
             );
+            setFinalCoordinates(
+                {
+                    xFinal : 0,
+                    yFinal : 0
+                }
+            )
             setCurrentCoordinates(
                 {
                     xCurrent: Math.round(event.clientX),
@@ -28,24 +33,12 @@ export const useMouseClickPosition = (targetDivId)=>{
             );
             isClicking = true;
         }
-        else{
-            setCoordinates(
-                {
-                    xInitial: 0,
-                    yInitial: 0,
-                    xFinal: 0,
-                    yFinal: 0
-                }
-            );
-        }
     }
 
     const onMouseUp = (event)=>{
         if (isClicking){
-            setCoordinates(
+            setFinalCoordinates(
                 {
-                    xInitial,
-                    yInitial,
                     xFinal : Math.round(event.clientX),
                     yFinal : Math.round(event.clientY)
                 }
@@ -57,9 +50,7 @@ export const useMouseClickPosition = (targetDivId)=>{
                 }
             );
             isClicking = false;
-        }
-        else{
-            isClicking = false;
+
         }
     }
 
@@ -94,6 +85,7 @@ export const useMouseClickPosition = (targetDivId)=>{
         console.log(`xInitial: ${xInitial}, yInitial: ${yInitial} xCurrent: ${xCurrent}, yCurrent: ${yCurrent}`)
     },[xCurrent, yCurrent])
     */
+    
     
     return(
         {

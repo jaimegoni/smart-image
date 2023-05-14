@@ -61,11 +61,16 @@ export const SmartImageConfiguration = ({imageData})=>{
     }
     ,[ xCurrent, yCurrent])
 
-    useEffect(()=>{console.log(draggedSquareStyle)},[draggedSquareStyle])
-    /*
-    useEffect(()=>{}
-    ,[isClicking, xFinal, yFinal])
-    */
+    
+    useEffect(()=>{
+
+        if (!(xFinal === 0) && !(yFinal === 0)){
+            if ((xFinal > xInitial) && (yFinal > yInitial)){
+                console.log(`xInitial: ${xInitial}, yInitial: ${yInitial}, xFinal: ${xFinal}, yFinal: ${yFinal}`)
+            }
+        }
+    }
+    ,[xFinal, yFinal])
 
     return(
         <div
