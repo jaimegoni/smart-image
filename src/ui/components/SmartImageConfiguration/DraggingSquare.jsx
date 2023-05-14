@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 
-export const DraggingSquare = ({xInitial, yInitial, xCurrent, yCurrent})=>{
+export const DraggingSquare = ({xInitial, yInitial, xCurrent, yCurrent, isDragging=true})=>{
 
     const resetDraggedSquareStyle = {
         "display": "none",
@@ -36,7 +36,7 @@ export const DraggingSquare = ({xInitial, yInitial, xCurrent, yCurrent})=>{
     if(draggedSquareStyle.display === "block"){
         return(
             <div
-                className="dragged__square--div"
+                className={isDragging ? "dragged__square--div" : "temporal__square--div"}
                 style={draggedSquareStyle}
             ></div>
         )

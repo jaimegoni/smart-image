@@ -6,6 +6,8 @@ export const calculateDisplayRectangleOnImage = (
         imageNaturalHeight,
         imageDisplayWidth,
         imageDisplayHeight,
+        imageOffsetX,
+        imageOffsetY,
         xInitialNaturalPosition,
         yInitialNaturalPosition,
         xFinalNaturalPosition,
@@ -24,8 +26,8 @@ export const calculateDisplayRectangleOnImage = (
 
     return(
         {
-            xDisplayPosition,
-            yDisplayPosition,
+            xDisplayPosition: imageOffsetX + xDisplayPosition,
+            yDisplayPosition: imageOffsetY + yDisplayPosition,
             widthDisplay,
             heightDisplay
         }

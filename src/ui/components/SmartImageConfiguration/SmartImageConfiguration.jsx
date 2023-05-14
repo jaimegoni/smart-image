@@ -5,6 +5,7 @@ import "./SmartImageConfiguration.css"
 
 import { calculateImageDisplayDimensions } from "../../../core/services/RelativePositioningCalculations/CalculateImageDisplayDimensions";
 import { DraggingSquare } from "./DraggingSquare";
+import { TemporalSquare } from "./TemporalSquare";
 
 export const SmartImageConfiguration = ({imageData})=>{
     
@@ -16,9 +17,10 @@ export const SmartImageConfiguration = ({imageData})=>{
     const [{imageDisplayWidth, imageDisplayHeight} , setDisplayDimensions] = useState(
         calculateImageDisplayDimensions(screenWidth, imageData.imageWidth, imageData.imageHeight)
     );
+    const [showTemporalSquare, setShowTemporalSquare] = useState(false);
 
     const { xInitial, yInitial, xFinal, yFinal, xCurrent, yCurrent } = useMouseClickPosition(imgContainerId);
-
+    
     const calculateContainerOffset = ()=>{
         const imgContainerDiv = document.getElementById(imgContainerId);
         setContainerOffset(
@@ -43,7 +45,7 @@ export const SmartImageConfiguration = ({imageData})=>{
 
         if (!(xFinal === 0) && !(yFinal === 0)){
             if ((xFinal > xInitial) && (yFinal > yInitial)){
-                console.log(`xInitial: ${xInitial}, yInitial: ${yInitial}, xFinal: ${xFinal}, yFinal: ${yFinal}`)
+                setShowTemporalSquare(true);
             }
         }
     }
@@ -56,6 +58,7 @@ export const SmartImageConfiguration = ({imageData})=>{
             return(window.removeEventListener("beforeunload", onResizeActions));
         }
         ,[])
+
     
     return(
         <div
@@ -77,6 +80,16 @@ export const SmartImageConfiguration = ({imageData})=>{
             xCurrent = {xCurrent}
             yCurrent = {yCurrent}
         />
+        {
+            showTemporalSquare
+                &&
+            <TemporalSquare
+                xInitial = {xInitial}
+                yInitial = {yInitial}
+                xFinal = {xFinal}
+                yFinal = {yFinal}
+            />
+        }
 
         </div>
     )

@@ -12,7 +12,6 @@ import { SmartImageConfiguration } from "../../components/SmartImageConfiguratio
 
 export const SmartImageConfigView = ()=>{
 
-    
     const { imageKey } = useParams();
 
     const [imageData, setImageData] = useState({});

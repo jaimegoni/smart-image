@@ -1,0 +1,25 @@
+
+.note__square--a{
+    position: absolute;
+    z-index: 10;
+}
+
+.note__square--div{
+    background-color: rgba(85, 35, 100, 0);
+    border: 2px solid rgba(85, 35, 100, 0);
+}
+
+.note__square--div:hover{
+    background-color: rgba(0, 0, 255, 0.3);
+    border: 2px solid rgba(0, 0, 255, 0.5);
+}
+
+.active__note--div{
+    background-color: rgba(255, 0, 0, 0.3);
+    border: 2px solid rgba(255, 0, 0, 0.5);
+}
+
+.configuration__note--div{
+    background-color: rgba(85, 35, 100, 0.3);
+    border: 2px solid rgba(85, 35, 100, 0.5);
+}
