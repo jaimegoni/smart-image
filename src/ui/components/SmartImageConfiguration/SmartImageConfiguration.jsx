@@ -6,6 +6,7 @@ import "./SmartImageConfiguration.css"
 import { calculateImageDisplayDimensions } from "../../../core/services/RelativePositioningCalculations/CalculateImageDisplayDimensions";
 import { DraggingSquare } from "./DraggingSquare";
 import { TemporalSquare } from "./TemporalSquare";
+import { ImageCreationNote } from "../ImageNotes/ImageCreationNote";
 
 export const SmartImageConfiguration = ({imageData})=>{
     
@@ -48,6 +49,9 @@ export const SmartImageConfiguration = ({imageData})=>{
                 setShowTemporalSquare(true);
             }
         }
+        else{
+            setShowTemporalSquare(false);
+        }
     }
     ,[xFinal, yFinal])
 
@@ -55,10 +59,15 @@ export const SmartImageConfiguration = ({imageData})=>{
         ()=>{
             window.addEventListener('resize', onResizeActions);
             calculateContainerOffset();
-            return(window.removeEventListener("beforeunload", onResizeActions));
+            return(
+                ()=>{
+                    window.removeEventListener("beforeunload", onResizeActions);
+                }
+                );
         }
         ,[])
-
+    
+    
     
     return(
         <div
@@ -83,12 +92,18 @@ export const SmartImageConfiguration = ({imageData})=>{
         {
             showTemporalSquare
                 &&
-            <TemporalSquare
-                xInitial = {xInitial}
-                yInitial = {yInitial}
-                xFinal = {xFinal}
-                yFinal = {yFinal}
-            />
+            <>
+                <TemporalSquare
+                    xInitial = {xInitial}
+                    yInitial = {yInitial}
+                    xFinal = {xFinal}
+                    yFinal = {yFinal}
+                />
+                <ImageCreationNote
+                    xPosition = { xFinal + 5}
+                    yPosition = { yInitial }
+                />
+            </>
         }
 
         </div>
