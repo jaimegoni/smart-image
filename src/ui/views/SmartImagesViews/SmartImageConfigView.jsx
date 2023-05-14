@@ -6,8 +6,8 @@ import "./SmartImageViews.css"
 import { getStoredImageByKey } from "../../../core/services/ImagesRegister/GetStoredImageByKey";
 
 import { StandardView } from "../../templates/StandardView/StandardView";
-import { SmartImageVisualization } from "../../components/SmartImageVisualization/SmartImageVisualization";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { SmartImageConfiguration } from "../../components/SmartImageConfiguration/SmartImageConfiguration";
 
 
 export const SmartImageConfigView = ()=>{
@@ -59,7 +59,7 @@ export const SmartImageConfigView = ()=>{
 
                     </div>
                     <div className="image__container--div">
-                        <SmartImageVisualization
+                        <SmartImageConfiguration
                             imageData = {imageData}
                         />
                     </div>
