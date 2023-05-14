@@ -4,29 +4,34 @@ import { useMouseClickPosition } from "../../../core/hooks/useMouseClickPosition
 import "./SmartImageConfiguration.css"
 
 import { calculateImageDisplayDimensions } from "../../../core/services/RelativePositioningCalculations/CalculateImageDisplayDimensions";
+import { DraggingSquare } from "./DraggingSquare";
 
 export const SmartImageConfiguration = ({imageData})=>{
     
     const imgContainerId = "smartImageImgConfig";
 
-    const resetDraggedSquareStyle = {
-        "display": "none",
-        "left": "0px",
-        "top": "0px",
-        "width": "0px",
-        "height": "0px"
-    }
 
     const [screenWidth, setScreenWidth] = useState(screen.width);
+    const [{offsetX, offsetY}, setContainerOffset] = useState({offsetX:0, offsetY:0});
     const [{imageDisplayWidth, imageDisplayHeight} , setDisplayDimensions] = useState(
         calculateImageDisplayDimensions(screenWidth, imageData.imageWidth, imageData.imageHeight)
     );
-    const [draggedSquareStyle, setDraggedSquareStyle] = useState(resetDraggedSquareStyle);
 
     const { xInitial, yInitial, xFinal, yFinal, xCurrent, yCurrent } = useMouseClickPosition(imgContainerId);
+
+    const calculateContainerOffset = ()=>{
+        const imgContainerDiv = document.getElementById(imgContainerId);
+        setContainerOffset(
+            {
+                offsetX: imgContainerDiv.offsetLeft,
+                offsetY: imgContainerDiv.offsetTop
+            }
+        );
+    }
     
     const onResizeActions = ()=>{
         setScreenWidth(screen.width);
+        calculateContainerOffset();
     }
 
     useEffect(()=>{
@@ -34,34 +39,6 @@ export const SmartImageConfiguration = ({imageData})=>{
         }
         ,[screenWidth])
 
-    useEffect(
-        ()=>{
-            window.addEventListener('resize', onResizeActions);
-            return(window.removeEventListener("beforeunload", onResizeActions));
-        }
-        ,[])
-    
-    useEffect(()=>{
-        if (!(xCurrent === 0) && !(yCurrent === 0)){
-            if(!(xInitial === xCurrent) && !(yInitial === yCurrent)){
-                setDraggedSquareStyle(
-                    {
-                        "display": "block",
-                        "left": xInitial + "px",
-                        "top": yInitial + "px",
-                        "minWidth": (xCurrent - xInitial) > 0 ? (xCurrent - xInitial) + "px" : "2px",
-                        "minHeight": (yCurrent - yInitial) > 0 ? (yCurrent - yInitial) + "px" : "2px"
-                    }
-                );
-            }
-        }
-        else{
-            setDraggedSquareStyle(resetDraggedSquareStyle);
-        }
-    }
-    ,[ xCurrent, yCurrent])
-
-    
     useEffect(()=>{
 
         if (!(xFinal === 0) && !(yFinal === 0)){
@@ -72,6 +49,14 @@ export const SmartImageConfiguration = ({imageData})=>{
     }
     ,[xFinal, yFinal])
 
+    useEffect(
+        ()=>{
+            window.addEventListener('resize', onResizeActions);
+            calculateContainerOffset();
+            return(window.removeEventListener("beforeunload", onResizeActions));
+        }
+        ,[])
+    
     return(
         <div
             id = {imgContainerId}
@@ -86,14 +71,12 @@ export const SmartImageConfiguration = ({imageData})=>{
                 }
             }
         >
-            {
-                draggedSquareStyle.display === "block"
-                    &&
-                <div
-                    className="dragged__square--div"
-                    style={draggedSquareStyle}
-                ></div>
-            }
+        <DraggingSquare
+            xInitial = {xInitial}
+            yInitial = {yInitial}
+            xCurrent = {xCurrent}
+            yCurrent = {yCurrent}
+        />
 
         </div>
     )
