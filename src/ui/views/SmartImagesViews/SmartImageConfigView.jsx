@@ -60,6 +60,7 @@ export const SmartImageConfigView = ()=>{
                     <div className="image__container--div">
                         <SmartImageConfiguration
                             imageData = {imageData}
+                            setImageData = { setImageData }
                         />
                     </div>
                 </>

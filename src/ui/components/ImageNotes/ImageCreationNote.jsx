@@ -1,7 +1,7 @@
 
 import "./ImageNotes.css"
 
-export const ImageCreationNote = ({xPosition, yPosition})=>{
+export const ImageCreationNote = ({xPosition, yPosition, setNoteTitle, setNoteText, onSaveNote})=>{
 
     return(
         <div
@@ -13,8 +13,9 @@ export const ImageCreationNote = ({xPosition, yPosition})=>{
                 }
             }
         >
-            <input type="text" placeholder="Write note"/>
-            <button type="button" className="btn btn-success">Save</button>
+            <input type="text" placeholder="Note title" onChange={(evt)=>{setNoteTitle(evt.target.value)}}/>
+            <textarea placeholder="Note text" onChange={(evt)=>{setNoteText(evt.target.value)}}></textarea>
+            <button type="button" className="btn btn-success" onClick={onSaveNote}>Save</button>
         </div>
     )
 }

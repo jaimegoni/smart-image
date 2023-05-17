@@ -1,4 +1,4 @@
-export const getRandomKey = (length = 20) => {
+export const getRandomKey = (length = 10) => {
     let result = '';
     const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;

@@ -7,8 +7,9 @@ import { calculateImageDisplayDimensions } from "../../../core/services/Relative
 import { DraggingSquare } from "./DraggingSquare";
 import { TemporalSquare } from "./TemporalSquare";
 import { ImageCreationNote } from "../ImageNotes/ImageCreationNote";
+import { saveNote } from "../../../core/services/NotesSavingAndModifying/SaveNote";
 
-export const SmartImageConfiguration = ({imageData})=>{
+export const SmartImageConfiguration = ({imageData, setImageData})=>{
     
     const imgContainerId = "smartImageImgConfig";
 
@@ -19,6 +20,9 @@ export const SmartImageConfiguration = ({imageData})=>{
         calculateImageDisplayDimensions(screenWidth, imageData.imageWidth, imageData.imageHeight)
     );
     const [showTemporalSquare, setShowTemporalSquare] = useState(false);
+    
+    const [noteTilte, setNoteTitle] = useState("");
+    const [noteText, setNoteText] = useState("");
 
     const { xInitial, yInitial, xFinal, yFinal, xCurrent, yCurrent } = useMouseClickPosition(imgContainerId);
     
@@ -35,6 +39,25 @@ export const SmartImageConfiguration = ({imageData})=>{
     const onResizeActions = ()=>{
         setScreenWidth(screen.width);
         calculateContainerOffset();
+    }
+
+    const onSaveNote = ()=>{
+        console.log(noteTilte);
+        console.log(noteText);
+        const newImageData = saveNote(
+            imageData,
+            xInitial,
+            yInitial,
+            xFinal,
+            yFinal,
+            offsetX,
+            offsetY,
+            imageDisplayWidth,
+            imageDisplayHeight,
+            noteTilte,
+            noteText
+        );
+        setImageData(newImageData);
     }
 
     useEffect(()=>{
@@ -102,6 +125,9 @@ export const SmartImageConfiguration = ({imageData})=>{
                 <ImageCreationNote
                     xPosition = { xFinal + 5}
                     yPosition = { yInitial }
+                    setNoteTitle = {setNoteTitle}
+                    setNoteText = {setNoteText}
+                    onSaveNote = {onSaveNote}
                 />
             </>
         }
