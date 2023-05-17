@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMouseClickPosition } from "../../../core/hooks/useMouseClickPosition";
+import { PropTypes } from 'prop-types';
 
 import "./SmartImageConfiguration.css"
 
@@ -42,8 +43,6 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
     }
 
     const onSaveNote = ()=>{
-        console.log(noteTilte);
-        console.log(noteText);
         const newImageData = saveNote(
             imageData,
             xInitial,
@@ -58,6 +57,8 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
             noteText
         );
         setImageData(newImageData);
+        setShowTemporalSquare(false);
+        
     }
 
     useEffect(()=>{
@@ -136,4 +137,9 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
         </div>
     )
 
+}
+
+SmartImageConfiguration.propTypes = {
+    imageData : PropTypes.object.isRequired,
+    setImageData: PropTypes.func.isRequired
 }
