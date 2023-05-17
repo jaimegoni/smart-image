@@ -13,6 +13,18 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: stretch;
     
+}
+
+.note__text--area{
+    margin-top: 0.25em;
+}
+
+.note__actions--div{
+    margin-top: 0.25em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }

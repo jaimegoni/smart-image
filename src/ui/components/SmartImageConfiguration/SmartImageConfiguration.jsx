@@ -64,7 +64,7 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
             setDisplayDimensions(calculateImageDisplayDimensions(screenWidth, imageData.imageWidth, imageData.imageHeight));
         }
         ,[screenWidth])
-
+    
     useEffect(()=>{
 
         if (!(xFinal === 0) && !(yFinal === 0)){
@@ -125,6 +125,7 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
                 <ImageCreationNote
                     xPosition = { xFinal + 5}
                     yPosition = { yInitial }
+                    setShowTemporalSquare = {setShowTemporalSquare}
                     setNoteTitle = {setNoteTitle}
                     setNoteText = {setNoteText}
                     onSaveNote = {onSaveNote}
