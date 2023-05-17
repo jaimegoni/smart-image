@@ -51,7 +51,7 @@ export const saveNote = (
         yNaturalFinal
     }
 
-    const newData = {
+    const newImageData = {
         ...imageData,
         imageNotes : [
             ...imageData.imageNotes,
@@ -59,7 +59,7 @@ export const saveNote = (
         ]
     }
 
-    rewriteStoredImage(imageData.key, newData);
+    rewriteStoredImage(imageData.key, newImageData);
 
-    return newData;
+    return newImageData;
 }
