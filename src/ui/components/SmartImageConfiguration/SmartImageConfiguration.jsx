@@ -5,10 +5,13 @@ import { PropTypes } from 'prop-types';
 import "./SmartImageConfiguration.css"
 
 import { calculateImageDisplayDimensions } from "../../../core/services/RelativePositioningCalculations/CalculateImageDisplayDimensions";
-import { DraggingSquare } from "./DraggingSquare";
-import { TemporalSquare } from "./TemporalSquare";
+import { DraggingSquare } from "../ImageNotes/DraggingSquare";
+import { TemporalSquare } from "../ImageNotes/TemporalSquare";
 import { ImageCreationNote } from "../ImageNotes/ImageCreationNote";
 import { saveNote } from "../../../core/services/NotesSavingAndModifying/SaveNote";
+import { saveNoteModification } from "../../../core/services/NotesSavingAndModifying/SaveNoteModification";
+import { deleteNote } from "../../../core/services/NotesSavingAndModifying/DeleteNote";
+import { ImageConfigurationNote } from "../ImageNotes/ImageConfigurationNote";
 
 export const SmartImageConfiguration = ({imageData, setImageData})=>{
     
@@ -61,6 +64,29 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
         
     }
 
+    const onModifyNote = (noteKey, noteTitle, noteText)=>{
+        const newImageData = saveNoteModification(
+            imageData,
+            noteKey,
+            noteTitle,
+            noteText
+        )
+        setImageData(newImageData);
+        return;
+    }
+
+    const onDeleteNote = (noteKey)=>{
+
+        if (confirm("Are you sure you want to delete the note?")){
+            const newImageData = deleteNote(
+                imageData,
+                noteKey
+            )
+            setImageData(newImageData);
+        }
+        return;
+    }
+
     useEffect(()=>{
             setDisplayDimensions(calculateImageDisplayDimensions(screenWidth, imageData.imageWidth, imageData.imageHeight));
         }
@@ -90,8 +116,6 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
                 );
         }
         ,[])
-    
-    
     
     return(
         <div
@@ -133,7 +157,22 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
                 />
             </>
         }
-
+        {
+            imageData.imageNotes.map((note)=>(
+                <ImageConfigurationNote
+                    key={note.noteKey}
+                    imageNote = {note}
+                    onModifyNote = {onModifyNote}
+                    onDeleteNote = {onDeleteNote}
+                    imageNaturalWidth = {imageData.imageWidth}
+                    imageNaturalHeight = {imageData.imageHeight}
+                    imageDisplayWidth = {imageDisplayWidth}
+                    imageDisplayHeight = {imageDisplayHeight}
+                    imageOffsetX = {offsetX}
+                    imageOffsetY = {offsetY}
+                />
+            ))
+        }
         </div>
     )
 

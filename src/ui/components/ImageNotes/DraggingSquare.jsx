@@ -1,5 +1,8 @@
 
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
+
+import "./ImageNotes.css";
 
 export const DraggingSquare = ({xInitial, yInitial, xCurrent, yCurrent, isDragging=true})=>{
 
@@ -36,7 +39,7 @@ export const DraggingSquare = ({xInitial, yInitial, xCurrent, yCurrent, isDraggi
     if(draggedSquareStyle.display === "block"){
         return(
             <div
-                className={isDragging ? "dragged__square--div" : "temporal__square--div"}
+                className={isDragging ? "dragged__square--div" : "active__square--div"}
                 style={draggedSquareStyle}
             ></div>
         )
@@ -45,4 +48,12 @@ export const DraggingSquare = ({xInitial, yInitial, xCurrent, yCurrent, isDraggi
         return(<></>)
     }
 
+}
+
+DraggingSquare.propTypes = {
+    xInitial : PropTypes.number.isRequired,
+    yInitial : PropTypes.number.isRequired,
+    xCurrent : PropTypes.number.isRequired,
+    yCurrent : PropTypes.number.isRequired,
+    isDragging : PropTypes.bool
 }
