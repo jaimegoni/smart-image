@@ -18,6 +18,15 @@ export const FaqView = ()=>{
 
                 <br/><br/><br/>
 
+                <h2 >Is the page safe?</h2>
+                <hr/>
+                <p>We do not keep, nor analyse or track any of your information</p>
+                <p><b style={{fontSize : "1.5em", fontWeight:"bolder", color:"red"}}>However</b>, this page stores the images and information in the local memory of your browser.</p>
+                <p>Information located in the browser can be accessed by malware.</p>
+                <p>We recommend you not to store sensitive information for long periods within your browser.</p>
+
+                <br/><br/><br/>
+
                 <h2 >Why aren&apos;t my images stored anymore?</h2>
                 <hr/>
                 <p>Images and data are stored in the cache memory of your browser. If the cache memory is cleaned, data dissapears. We recommend you to download the data after extracting it.</p>
