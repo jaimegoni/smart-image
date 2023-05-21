@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './ImageNotes.css';
 
-import { calculateDisplayPositionOnImage } from "../../../core/services/RelativePositioningCalculations/CalculateDisplayPositionOnImage";
+import { calculateSquareDisplayCoordinates } from "../../../core/services/RelativePositioningCalculations/CalculateSquareDisplayCoordinates";
 
 export const ImageConfigurationNote = (
     {
@@ -41,60 +41,21 @@ export const ImageConfigurationNote = (
     const [{initialX, initialY, finalX, finalY} , setAnchorCoordinates] = useState( defaultCoordinates );
     const [anchorSquareStyle, setAnchorSquareStyle ] = useState(defaultAnchorStyle);
     
-    const calculateSquareCoordinates = ()=>{
-
-        let squareCoordinates = {
-            initialX : 0,
-            initialY : 0,
-            finalX : 0,
-            finalY : 0
-        }
-
-        const initialPoints = calculateDisplayPositionOnImage(
-            imageNaturalWidth,
-            imageNaturalHeight,
-            imageDisplayWidth,
-            imageDisplayHeight,
-            imageOffsetX,
-            imageOffsetY,
-            imageNote.xNaturalInitial,
-            imageNote.yNaturalInitial
-        );
-
-        squareCoordinates = {
-            ...squareCoordinates,
-            initialX : initialPoints.xDisplayPosition,
-            initialY : initialPoints.yDisplayPosition
-        };
-        
-        const finalPoints = calculateDisplayPositionOnImage(
-            imageNaturalWidth,
-            imageNaturalHeight,
-            imageDisplayWidth,
-            imageDisplayHeight,
-            imageOffsetX,
-            imageOffsetY,
-            imageNote.xNaturalFinal,
-            imageNote.yNaturalFinal
-        );
-
-        
-        squareCoordinates = {
-            ...squareCoordinates,
-            finalX : finalPoints.xDisplayPosition,
-            finalY : finalPoints.yDisplayPosition
-        };
-
-        return(
-            squareCoordinates
-        )
-    }
-
-
     useEffect(
         ()=>{
             if(!(imageOffsetX === 0) && !(imageOffsetY === 0)){
-                const squareCoordinates = calculateSquareCoordinates();
+                const squareCoordinates = calculateSquareDisplayCoordinates(
+                    imageNaturalWidth,
+                    imageNaturalHeight,
+                    imageDisplayWidth,
+                    imageDisplayHeight,
+                    imageOffsetX,
+                    imageOffsetY,
+                    imageNote.xNaturalInitial,
+                    imageNote.yNaturalInitial,
+                    imageNote.xNaturalFinal,
+                    imageNote.yNaturalFinal
+                );
                 setAnchorCoordinates(squareCoordinates);
             }
         }
