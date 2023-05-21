@@ -14,10 +14,12 @@ import { ImageUploader } from "../ImageUploader/ImageUploader";
 
 export const UploadImageModal = ({setIsModalActive})=>{
 
+    const textInputId = "imageNameInput";
+
     const [imageName, setImageName] = useState("");
     const [file, setFile] = useState(null);
     const [b64image, setB64image] = useState("");
-    const [{imageWidth, imageHeight}, setImageDimensions] = useState({imageWidth:0, imageHeight:0})
+    const [{imageWidth, imageHeight}, setImageDimensions] = useState({imageWidth:0, imageHeight:0});
 
     const [imageInfo, setImageInfo] = useState ({});
 
@@ -32,7 +34,7 @@ export const UploadImageModal = ({setIsModalActive})=>{
 
     const toNextStep = ()=>{
         const imageKey = storeNewImage(imageInfo);
-        navigate("/smartImage/"+imageKey);
+        navigate("/smartImageConfiguration/"+imageKey);
     }
 
     const getClickedElementId = (event)=>{
@@ -48,7 +50,7 @@ export const UploadImageModal = ({setIsModalActive})=>{
                 imageToBase64(file, setB64image);
             }
         }
-        , [file]);
+    ,[file]);
 
     useEffect(()=>{
 
@@ -78,6 +80,11 @@ export const UploadImageModal = ({setIsModalActive})=>{
         }
         ,[imageName, imageWidth, imageHeight]);
     
+    useEffect(()=>{
+        document.getElementById(textInputId).focus();
+    }
+    ,[])
+
     return(
         <div
             id="modalBackgroundDiv"
@@ -103,7 +110,7 @@ export const UploadImageModal = ({setIsModalActive})=>{
                     <div className="modal-body" style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
                         <h2> Name of the image</h2>
                         <br/>
-                        <input type="text" placeholder="Image name" onChange={(event) => {setImageName(event.target.value);}} style={{minWidth : "30%"}}/>
+                        <input id={textInputId} type="text" placeholder="Image name" onChange={(event) => {setImageName(event.target.value);}} style={{minWidth : "30%"}}/>
                         <br/><br/>
                         <h2> Choose an image</h2>
                         <br/>

@@ -12,7 +12,7 @@ export const FaqView = ()=>{
                 <br/><br/><br/>
                 <h2 >Do we keep any data from you or your images?</h2>
                 <hr/>
-                <p>No. This page is completely built on Javascript and only runs into your browser.</p>
+                <p><b  style={{fontSize : "1.5em", fontWeight:"bolder"}}>No.</b> This page is completely built on Javascript and only runs into your browser.</p>
                 <p>No data is transferred to any backend. Images and information is stored in your browser for you to use them whenever you want.</p>
                 <p>We can&apos;t access to any information you upload.</p>
 

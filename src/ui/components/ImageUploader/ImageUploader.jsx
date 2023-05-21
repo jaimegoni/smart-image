@@ -1,4 +1,6 @@
 import { useState } from "react";
+import PropTypes from 'prop-types'
+
 import "./ImageUploader.css"
 
 export const ImageUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "image/png"]})=>{
@@ -97,4 +99,10 @@ export const ImageUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "im
             
         </div>
     )
+}
+
+ImageUploader.propTypes = {
+    file : PropTypes.any.isRequired,
+    setFile : PropTypes.func.isRequired,
+    acceptedTypes : PropTypes.array
 }

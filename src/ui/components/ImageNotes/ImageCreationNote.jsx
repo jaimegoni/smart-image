@@ -1,9 +1,17 @@
 
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import "./ImageNotes.css";
 
 export const ImageCreationNote = ({xPosition, yPosition, setShowTemporalSquare, setNoteTitle, setNoteText, onSaveNote})=>{
+
+    const titleInputId = "titleInput";
+
+    useEffect(()=>{
+        document.getElementById(titleInputId).focus();
+    }
+    , []);
 
     return(
         <div
@@ -15,7 +23,7 @@ export const ImageCreationNote = ({xPosition, yPosition, setShowTemporalSquare, 
                 }
             }
         >
-            <input type="text" placeholder="Note title" onChange={(evt)=>{setNoteTitle(evt.target.value)}}/>
+            <input id = {titleInputId} type="text" placeholder="Note title" onChange={(evt)=>{setNoteTitle(evt.target.value)}}/>
             <textarea className="note__text--area" placeholder="Note text" onChange={(evt)=>{setNoteText(evt.target.value)}}></textarea>
             <div className="note__actions--div">
                 <button type="button" className="btn btn-warning" onClick={()=>{setShowTemporalSquare(false)}}>Cancel</button>
