@@ -63,3 +63,15 @@
     cursor: pointer;
     border-color: red;
 }
+
+.visualization__square--div{
+    position: absolute;
+    background-color: rgba(128, 0, 255, 0);
+
+    z-index: 10;
+}
+.visualization__square--div:hover{
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0.3);
+    border: 2px solid red;
+}

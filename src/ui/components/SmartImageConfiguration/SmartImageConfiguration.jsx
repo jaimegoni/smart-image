@@ -115,7 +115,7 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
                 }
                 );
         }
-        ,[])
+    ,[])
     
     return(
         <div

@@ -1,37 +1,57 @@
 
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
+
+import '../ImageNotes/ImageNotes.css';
 
 import { calculateImageDisplayDimensions } from "../../../core/services/RelativePositioningCalculations/CalculateImageDisplayDimensions";
+import { ImageVisualizationNote } from "../ImageNotes/ImageVisualizationNote";
 
 export const SmartImageVisualization = ({imageData})=>{
     
     const imgContainerId = "smartImageImg";
 
     const [screenWidth, setScreenWidth] = useState(screen.width);
-
+    const [activeNotes, setActiveNotes] = useState([]);
+    const [{offsetX, offsetY}, setContainerOffset] = useState({offsetX:0, offsetY:0});
     const [{imageDisplayWidth, imageDisplayHeight} , setDisplayDimensions] = useState(
         calculateImageDisplayDimensions(screenWidth, imageData.imageWidth, imageData.imageHeight)
     );
 
+
+    const calculateContainerOffset = ()=>{
+        const imgContainerDiv = document.getElementById(imgContainerId);
+        setContainerOffset(
+            {
+                offsetX: imgContainerDiv.offsetLeft,
+                offsetY: imgContainerDiv.offsetTop
+            }
+        );
+    }
     
     const onResizeActions = ()=>{
         setScreenWidth(screen.width);
+        calculateContainerOffset();
     }
     
+    // useEffect(()=>{console.log(activeNotes)}, [activeNotes])
+
     useEffect(()=>{
             setDisplayDimensions(calculateImageDisplayDimensions(screenWidth, imageData.imageWidth, imageData.imageHeight));
         }
-        ,[screenWidth]
-    )
+    ,[screenWidth])
 
     useEffect(
         ()=>{
             window.addEventListener('resize', onResizeActions);
-
-            return(window.removeEventListener("beforeunload", onResizeActions));
+            calculateContainerOffset();
+            return(
+                ()=>{
+                    window.removeEventListener("beforeunload", onResizeActions);
+                }
+                );
         }
-        ,[]
-    )
+    ,[])
 
     return(
         <div
@@ -47,8 +67,27 @@ export const SmartImageVisualization = ({imageData})=>{
                 }
             }
         >
-
+        {
+            imageData.imageNotes.map((note)=>(
+                <ImageVisualizationNote
+                    key={note.noteKey}
+                    imageNote = {note}
+                    activeNotes = {activeNotes}
+                    setActiveNotes = {setActiveNotes}
+                    imageNaturalWidth = {imageData.imageWidth}
+                    imageNaturalHeight = {imageData.imageHeight}
+                    imageDisplayWidth = {imageDisplayWidth}
+                    imageDisplayHeight = {imageDisplayHeight}
+                    imageOffsetX = {offsetX}
+                    imageOffsetY = {offsetY}
+                />
+            ))
+        }
         </div>
     )
 
+}
+
+SmartImageVisualization.propTypes = {
+    imageData : PropTypes.object.isRequired,
 }
