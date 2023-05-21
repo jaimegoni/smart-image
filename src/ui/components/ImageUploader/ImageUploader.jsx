@@ -102,7 +102,7 @@ export const ImageUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "im
 }
 
 ImageUploader.propTypes = {
-    file : PropTypes.any.isRequired,
+    file : PropTypes.any,
     setFile : PropTypes.func.isRequired,
     acceptedTypes : PropTypes.array
 }

@@ -32,12 +32,42 @@
     max-width: 100%;
 }
 
+.image__actions--div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    width: 100%;
+}
+
 .image__card--del{
     border: 1px solid red;
     border-radius: 3px;
-    align-self: flex-end;
 }
 .image__card--del:hover{
     background-color: red;
     
+}
+
+.image__card--download{
+    border: 1px solid green;
+    border-radius: 3px;
+    margin-right: 0.5em;
+}
+.image__card--download:hover{
+    background-color: green;
+    
+}
+
+
+.image__title--p{
+    margin: 3px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    max-width: 12em;
+}
+
+.image__download--img{
+    width: 1em;
 }

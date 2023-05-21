@@ -99,7 +99,7 @@ export const ImageVisualizationNote = (
                 className= { isActive ? "active__square--div": "visualization__square--div"}
                 style={anchorSquareStyle}
                 onClick={()=>{toggleActivation()}}
-                title={imageNote.noteTitle}
+                title={imageNote.noteTitle + " | " + imageNote.noteText}
             >
             </div>
         )
