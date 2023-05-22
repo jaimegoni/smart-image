@@ -15,7 +15,8 @@ import { smartImagesToZipFile } from "../../../core/services/JsonDownloads/Smart
 
 export const HomeView = ()=>{
 
-    const [modalActive, setModalActive] = useState(false);
+    const [uploadImageModalActive, setUploadImageModalActive] = useState(false);
+    const [uploadJsonModalActive, setUploadJsonModalActive] = useState(false);
     const navigate = useNavigate();
     
     const imagesKeys = getStoredImagesKeys();
@@ -37,8 +38,8 @@ export const HomeView = ()=>{
         <StandardView>
             <h1>Welcome</h1>
             <div className="pool__actions--div">
-                <button className="btn btn-outline-primary" onClick={()=>{setModalActive(!modalActive)}}>Add new image</button>
-                <button className="btn btn-outline-warning" style={{marginLeft: "0.5em"}} onClick={()=>{setModalActive(!modalActive)}}>Upload Smart Image</button>
+                <button className="btn btn-outline-primary" onClick={()=>{setUploadImageModalActive(!uploadImageModalActive)}}>Add new image</button>
+                <button className="btn btn-outline-warning" style={{marginLeft: "0.5em"}} onClick={()=>{setUploadJsonModalActive(!uploadImageModalActive)}}>Upload Smart Image</button>
                 <button className="btn btn-outline-success" style={{marginLeft: "0.5em"}} onClick={()=>{downloadSmartImages()}}>Download all images</button>
                 <button className="btn btn-outline-danger" style={{marginLeft: "0.5em"}} onClick={()=>{deleteAllImages()}}>Delete all images</button>
             </div>
@@ -59,12 +60,13 @@ export const HomeView = ()=>{
                 }
             </div>
             {
-                modalActive
+                uploadImageModalActive
                     &&
                 <UploadImageModal
-                    setIsModalActive = {setModalActive}
+                    setIsModalActive = {setUploadImageModalActive}
                 /> 
             }
+
         </StandardView>
     )
 }

@@ -1,0 +1,11 @@
+
+.close__button{
+    border: none;
+    border-radius: 2px;
+
+}
+
+.close__button:hover{
+    background-color: red;
+    color:white;
+}
