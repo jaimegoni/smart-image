@@ -47,7 +47,7 @@ export const SmartImageVisualization = ({imageData})=>{
             calculateContainerOffset();
             return(
                 ()=>{
-                    window.removeEventListener("beforeunload", onResizeActions);
+                    window.removeEventListener("resize", onResizeActions);
                 }
                 );
         }

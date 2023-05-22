@@ -111,7 +111,7 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
             calculateContainerOffset();
             return(
                 ()=>{
-                    window.removeEventListener("beforeunload", onResizeActions);
+                    window.removeEventListener("resize", onResizeActions);
                 }
                 );
         }

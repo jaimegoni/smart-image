@@ -29,6 +29,7 @@
 }
 
 .image__card--img{
+    margin-top: 0.5em;
     max-width: 100%;
 }
 
@@ -61,7 +62,7 @@
 
 
 .image__title--p{
-    margin: 3px;
+    padding: 3px;
     text-overflow: ellipsis;
     overflow: hidden;
 
