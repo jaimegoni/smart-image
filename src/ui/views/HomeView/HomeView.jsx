@@ -11,6 +11,7 @@ import { ImageCard } from "../../components/ImageCard/ImageCard";
 import { StandardView } from "../../templates/StandardView/StandardView";
 import { UploadImageModal } from "../../components/UploadImageModal/UploadImageModal";
 import { deleteStoredImages } from "../../../core/services/ImagesRegister/DeleteStoredImages";
+import { smartImagesToZipFile } from "../../../core/services/JsonDownloads/SmartImagesToZipFile";
 
 export const HomeView = ()=>{
 
@@ -26,14 +27,20 @@ export const HomeView = ()=>{
             navigate(0);
         }
     }
+
+    const downloadSmartImages = ()=>{
+        const smartImages = imagesKeys.map((imageKey)=>(getStoredImageByKey(imageKey)));
+        smartImagesToZipFile(smartImages);
+    }
     
     return(
         <StandardView>
             <h1>Welcome</h1>
             <div className="pool__actions--div">
-                <button className="btn btn-primary" onClick={()=>{setModalActive(!modalActive)}}>Add new image</button>
-                <button className="btn btn-success" style={{marginLeft: "0.5em"}} onClick={()=>{setModalActive(!modalActive)}}>Download all images</button>
-                <button className="btn btn-danger" style={{marginLeft: "0.5em"}} onClick={()=>{deleteAllImages()}}>Delete all images</button>
+                <button className="btn btn-outline-primary" onClick={()=>{setModalActive(!modalActive)}}>Add new image</button>
+                <button className="btn btn-outline-warning" style={{marginLeft: "0.5em"}} onClick={()=>{setModalActive(!modalActive)}}>Upload Smart Image</button>
+                <button className="btn btn-outline-success" style={{marginLeft: "0.5em"}} onClick={()=>{downloadSmartImages()}}>Download all images</button>
+                <button className="btn btn-outline-danger" style={{marginLeft: "0.5em"}} onClick={()=>{deleteAllImages()}}>Delete all images</button>
             </div>
             <div className="images__pool--div">
                 {

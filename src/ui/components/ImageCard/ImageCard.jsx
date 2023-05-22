@@ -11,7 +11,7 @@ import { objectToDownloadLink } from "../../../core/services/JsonDownloads/Objec
 export const ImageCard = ({imageInfo})=>{
 
     const onDeleteImage = ()=>{
-        if (confirm(`Are you sure to delete the image ${imageInfo.imageName}?`)){
+        if (confirm(`Are you sure to delete the image "${imageInfo.imageName}"?`)){
             deleteImageByKey(imageInfo.key);
             window.location.reload(false);
         }
@@ -31,7 +31,7 @@ export const ImageCard = ({imageInfo})=>{
                     :
             <div className="image__card--div">
                 <div className="image__actions--div">
-                    <a  className="image__card--download" target="_blank" rel="noreferrer" href={objectToDownloadLink(imageInfo)} download="scene.json"><img src="/images/download_icon.png" alt="downloadIcon" className="image__download--img"/></a>
+                    <a  className="image__card--download" target="_blank" rel="noreferrer" href={objectToDownloadLink(imageInfo)} download={imageInfo.imageName + ".json"}><img src="/images/download_icon.png" alt="downloadIcon" className="image__download--img"/></a>
                     <button onClick={onDeleteImage} className="image__card--del">🗑</button>
                 </div>
 
