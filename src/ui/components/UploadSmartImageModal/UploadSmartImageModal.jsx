@@ -4,18 +4,18 @@ import { useNavigate } from "react-router-dom";
 
 import {PropTypes} from 'prop-types';
 
-import "./UploadImageModal.css";
+import "./UploadSmartImageModal.css";
 
-import { ImageUploader } from "../ImageUploader/ImageUploader";
+import { SmartImageUploader } from "../SmartImagesUploader/SmartImageUploader";
 
 export const UploadSmartImageModal = ({setIsModalActive})=>{
 
-    const [file, setFile] = useState(null);
+    const [files, setFiles] = useState([]);
 
     const navigate = useNavigate();
 
     const isInformationUploaded = ()=>{
-        if (!(file === null)){
+        if (!(files.length === 0)){
             return true;
         }
         return false;
@@ -54,11 +54,12 @@ export const UploadSmartImageModal = ({setIsModalActive})=>{
                         </button>
                     </div>
                     <div className="modal-body" style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-                        <h2> Choose smart images (json files)</h2>
+                        <h2 style={{textAlign:"center"}}> Choose smart images</h2>
+                        <h2 style={{textAlign:"center"}}>(json files)</h2>
                         <br/>
-                        <ImageUploader
-                            file={file}
-                            setFile={setFile}
+                        <SmartImageUploader
+                            files={files}
+                            setFiles={setFiles}
                         />
                     </div>
                     <div className="modal-footer">

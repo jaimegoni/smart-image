@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import "./SmartImageUploader.css"
 
-export const SmartImageUploader = ({files, setFiles, acceptedTypes = ["application/JSON"]})=>{
+export const SmartImageUploader = ({files, setFiles, acceptedTypes = ["application/json"]})=>{
 
     const inputId = "dropzoneInput"
 
@@ -19,13 +19,8 @@ export const SmartImageUploader = ({files, setFiles, acceptedTypes = ["applicati
 
         if (event.dataTransfer.items){
 
-            const items = [...event.dataTransfer.items];
-
-            const acceptedDroppedItems = items.map((item)=>{
-                item.kind === "file" ? true : false;
-            })
-
-            droppedFiles = acceptedDroppedItems.map((droppedItem)=>(droppedItem.getAsFile()));
+            const dataTransferKeys = Object.keys(event.dataTransfer.items);
+            droppedFiles = dataTransferKeys.map((key)=>(event.dataTransfer.items[key].getAsFile()));
             
         }
         else{
@@ -36,12 +31,7 @@ export const SmartImageUploader = ({files, setFiles, acceptedTypes = ["applicati
 
         if (acceptedFiles.length > 0){
 
-            const dataTransfer = new DataTransfer();
-
-            acceptedFiles.map((file)=>{
-                dataTransfer.items.add(file);
-            })
-            document.getElementById(inputId).files = dataTransfer.files;
+            updateFileInput(acceptedFiles);
             setFiles(acceptedFiles);
         }
 
@@ -56,26 +46,65 @@ export const SmartImageUploader = ({files, setFiles, acceptedTypes = ["applicati
         setIsDraggedOver(false);
     }
 
-    const removeFile = ()=>{
+    const removeAllFiles = ()=>{
         document.getElementById(inputId).value = "";
         setFiles([]);
+    }
+
+    const removeFileByName = (fileName)=>{
+
+        const filesAfterRemoving = files.filter(
+            (file)=>(!(file.name === fileName))
+        );
+
+        if (filesAfterRemoving.length < 1){
+            removeAllFiles();
+            return;
+        }
+        else{
+            updateFileInput(filesAfterRemoving);
+            setFiles(filesAfterRemoving);
+        }
+
     }
 
     const acceptedTypesToString = ()=>{
         let stringAcceptedTypes = "";
         acceptedTypes.forEach((type) =>{stringAcceptedTypes += type + ", "})
+        stringAcceptedTypes = stringAcceptedTypes.slice(0, -2)
         return stringAcceptedTypes;
     }
 
     const onInputChange = (event)=>{
-        if (event.target.files[0]){
-            if(acceptedTypes.includes(event.target.files[0].type)){
-                setFiles(event.target.files[0]);
+
+        let correctUploadedFiles = [];
+        const chosenFiles = Object.keys(event.target.files).map(
+            (key)=>(event.target.files[key])
+        );
+
+        chosenFiles.forEach((file)=>{
+            if (acceptedTypes.includes(file.type)){
+                correctUploadedFiles = [...correctUploadedFiles, file];
             }
-            else{
-                event.target.value = "";
-            }
+        });
+
+        if (correctUploadedFiles.length > 0){
+            updateFileInput(correctUploadedFiles);
+            setFiles(correctUploadedFiles);
+
         }
+        else{
+            setFiles([]);
+            event.target.value = "";
+        }
+    }
+
+    const updateFileInput = (files)=>{
+        const dataTransfer = new DataTransfer();
+        files.map((file)=>{
+            dataTransfer.items.add(file);
+        })
+        document.getElementById(inputId).files = dataTransfer.files;
     }
 
     return(
@@ -90,16 +119,22 @@ export const SmartImageUploader = ({files, setFiles, acceptedTypes = ["applicati
                 <div className="dropzone__components--div">
                     <p>Drag and drop image</p>
                     <p>or</p>
-                    <input id={inputId} type="file" onChange={onInputChange} accept={acceptedTypesToString()}/>
+                    <input id={inputId} type="file" onChange={onInputChange} accept={acceptedTypesToString()} multiple/>
                 </div>
             </div>
             {
-                !(files === [])
+                !(files.length <1)
                     &&
-                <div style={{display:"flex", flexDirection:"row", justifyContent:"space-evenly", alignItems:"center"}}>
-                    <p>Archivo</p>
-                    <button className="btn btn-outline-danger" onClick={()=>{removeFile();}}>Remove image</button>
-                </div>
+                files.map((file)=>(
+                    <div
+                        key={file.name}
+                        style={{display:"flex", flexDirection:"row", justifyContent:"space-evenly", alignItems:"center", marginBottom:"0.5em"}}
+                    >
+                        <p style={{marginRight:"0.5em"}}>{file.name}</p>
+                        <button className="btn btn-outline-danger" onClick={()=>{removeFileByName(file.name);}}>x</button>
+                    </div>
+                ))
+
             }
             
         </div>
