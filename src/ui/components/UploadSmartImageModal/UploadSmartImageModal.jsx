@@ -7,10 +7,13 @@ import {PropTypes} from 'prop-types';
 import "./UploadSmartImageModal.css";
 
 import { SmartImageUploader } from "../SmartImagesUploader/SmartImageUploader";
+import { readJson } from "../../../core/services/ReadJson/ReadJson";
+import { storeNewImage } from "../../../core/services/ImagesRegister/StoreNewImage";
 
 export const UploadSmartImageModal = ({setIsModalActive})=>{
 
     const [files, setFiles] = useState([]);
+    
 
     const navigate = useNavigate();
 
@@ -21,7 +24,23 @@ export const UploadSmartImageModal = ({setIsModalActive})=>{
         return false;
     }
 
-    const toNextStep = ()=>{
+
+    const toNextStep = async()=>{
+        let smartImages = [];
+
+        files.forEach(async(file)=>{
+            let data = await readJson(file);
+            smartImages = [...smartImages, data];
+            if (smartImages.length === files.length){
+                saveAndRefresh(smartImages);
+            }
+        })
+        
+        //navigate(0);
+    }
+
+    const saveAndRefresh = (smartImages)=>{
+        smartImages.map((sImage)=>{storeNewImage(sImage)})
         navigate(0);
     }
 
@@ -30,6 +49,7 @@ export const UploadSmartImageModal = ({setIsModalActive})=>{
             setIsModalActive(false);
         }
     }
+
 
     return(
         <div
