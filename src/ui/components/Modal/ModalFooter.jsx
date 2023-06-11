@@ -16,5 +16,5 @@ export const ModalFooter = ({setIsModalActive, children})=>{
 
 ModalFooter.propTypes = {
     setIsModalActive: PropTypes.func.isRequired,
-    children: PropTypes.element.isRequired
+    children: PropTypes.element
 }

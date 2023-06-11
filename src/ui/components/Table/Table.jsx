@@ -3,10 +3,9 @@ import {useState} from "react";
 import PropTypes from 'prop-types';
 
 
-
-import PaginationSelect from "./PaginationSelect";
-import QuickFilter from "./QuickFilter";
-import PaginationButtons from "./PaginationButtons";
+import {PaginationSelect} from "./TableComponents/PaginationSelect";
+import {QuickFilter} from "./TableComponents/QuickFilter";
+import {PaginationButtons} from "./TableComponents/PaginationButtons";
 
 const filterData = (quickFilter, tableContent) => {
     if (quickFilter === ""){
@@ -100,7 +99,7 @@ const sortByColumn = (sortColumn, sortColumnType, tableHeaders, filteredData) =>
     }
 }
 
-export const Table = ({tableHeaders, tableContent, createRowCallback}) => {
+export const Table = ({tableLabels, tableHeaders, tableContent, createRowCallback}) => {
 
     const [sortColumn, setSortColumn] = useState("");
     const [sortColumnType, setSortColumnType] = useState("none");
@@ -137,7 +136,9 @@ export const Table = ({tableHeaders, tableContent, createRowCallback}) => {
                                             key={colHeader}
                                             onClick={()=>{configureSort(colHeader, sortColumn, setSortColumn, sortColumnType, setSortColumnType)}}
                                         >
-                                            {colHeader === sortColumn ? sortColumnType === "ascending" ? "🔺" + colHeader : "🔻" + colHeader  : colHeader}
+                                            {   
+                                                colHeader === sortColumn ? sortColumnType === "ascending" ? "🔺" + tableLabels[tableHeaders.indexOf(colHeader)] : "🔻" + tableLabels[tableHeaders.indexOf(colHeader)]  : tableLabels[tableHeaders.indexOf(colHeader)]
+                                            }
                                         </th>
                                         )
                                 )
@@ -169,6 +170,7 @@ export const Table = ({tableHeaders, tableContent, createRowCallback}) => {
 }
 
 Table.propTypes = {
+    tableLabels : PropTypes.array.isRequired,
     tableHeaders : PropTypes.array.isRequired,
     tableContent : PropTypes.array.isRequired,
     createRowCallback : PropTypes.func.isRequired,

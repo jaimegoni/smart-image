@@ -43,7 +43,7 @@ const calculateButtons = (buttonsAmount, showPage) => {
 }
 
 
-const PaginationButtons = ({tableContentLength, showRows, showPage, setShowPage}) =>{
+export const PaginationButtons = ({tableContentLength, showRows, showPage, setShowPage}) =>{
     
     const buttonsAmount = Math.ceil(tableContentLength/showRows);
 
@@ -67,5 +67,3 @@ PaginationButtons.propTypes = {
     showPage : PropTypes.number.isRequired,
     setShowPage : PropTypes.func.isRequired,
 }
-
-export default PaginationButtons;

@@ -9,6 +9,7 @@ import { StandardView } from "../../templates/StandardView/StandardView";
 import { SmartImageVisualization } from "../../components/SmartImageVisualization/SmartImageVisualization";
 
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { NotesFilter } from "../../components/NotesFilter/NotesFilter";
 
 
 
@@ -56,8 +57,10 @@ export const SmartImageView = ()=>{
                         <Link to={`/smartImageConfiguration/${imageKey}`} className="btn btn-outline-primary" style={{marginLeft : "1em"}}>
                             Configuration
                         </Link>
-
                     </div>
+                    <NotesFilter
+                        imageNotes={imageData.imageNotes}
+                    />
                     <div className="image__container--div">
                         <SmartImageVisualization
                             imageData = {imageData}
