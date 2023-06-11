@@ -23,6 +23,7 @@ export const NotesFilter = ({imageNotes})=>{
     const createNoteRow = (note) =>{
         return(
             <NotesFilterRow
+                key={note.noteKey}
                 note={note}
                 activeNotesKeys={activeNotesKeys}
                 setActiveNotesKeys={setActiveNotesKeys}
@@ -36,7 +37,11 @@ export const NotesFilter = ({imageNotes})=>{
             {
                 isModalActive
                     &&
-                <LargeModalDialog>
+                <LargeModalDialog
+                    setIsModalActive={setIsModalActive}
+                    modalTitle='Filter notes'
+                    
+                >
                     <>
                         <ModalBody>
                             <>

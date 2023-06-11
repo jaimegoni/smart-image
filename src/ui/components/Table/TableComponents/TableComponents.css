@@ -24,3 +24,8 @@
     margin-left: 1em;
     margin-right: 1em;
 }
+
+.sticky__thead{
+    position: sticky;
+    top: 0;
+}
