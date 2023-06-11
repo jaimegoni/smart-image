@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import {PropTypes} from 'prop-types';
 
-import "./UploadImageModal.css";
-
 import { storeNewImage } from "../../../core/services/ImagesRegister/StoreNewImage";
 import { imageToBase64 } from "../../../core/services/ImageToBase64/ImageToBase64";
 import { extractOriginalImageSize } from "../../../core/services/ExtractOriginalImageSize/ExtractOriginalImageSize";
@@ -84,7 +82,7 @@ export const UploadImageModal = ({setIsModalActive})=>{
     return(
         <LargeModalDialog
             setIsModalActive={setIsModalActive}
-            modalTitle="Choose an image"
+            modalTitle="Upload image"
         >
             <>
                 <ModalBody>
