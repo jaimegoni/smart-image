@@ -7,7 +7,7 @@ import { getStoredImageByKey } from "../../../core/services/ImagesRegister/GetSt
 
 import { StandardView } from "../../templates/StandardView/StandardView";
 import { SmartImageVisualization } from "../../components/SmartImageVisualization/SmartImageVisualization";
-import { SmartImageFilter } from "../../components/SmartImageFilter/SmartImageFilter";
+
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
 
