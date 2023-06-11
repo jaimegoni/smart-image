@@ -1,0 +1,12 @@
+
+.quick__options--div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sticky__thead{
+    position: sticky;
+    top: 0;
+}

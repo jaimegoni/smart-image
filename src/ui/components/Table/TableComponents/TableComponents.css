@@ -1,0 +1,26 @@
+
+.table__buttons--div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.quick__filter--div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination__select--div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination__select--select{
+    margin-left: 1em;
+    margin-right: 1em;
+}
