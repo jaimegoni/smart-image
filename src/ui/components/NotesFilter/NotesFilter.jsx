@@ -45,7 +45,7 @@ export const NotesFilter = ({imageNotes})=>{
                     <>
                         <ModalBody>
                             <>
-                                <div>
+                                <div className='activation__buttons--div'>
                                     <button type='button' className='btn btn-primary' onClick={()=>{activateAllNotes()}}>Activate all notes</button>
                                     <button type='button' className='btn btn-secondary' onClick={()=>{deactivateAllNotes()}}>Deactivate all notes</button>
                                 </div>

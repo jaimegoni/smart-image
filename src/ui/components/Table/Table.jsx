@@ -2,6 +2,7 @@
 import {useState, useEffect} from "react";
 import PropTypes from 'prop-types';
 
+import "./Table.css";
 
 import {PaginationSelect} from "./TableComponents/PaginationSelect";
 import {QuickFilter} from "./TableComponents/QuickFilter";
@@ -110,7 +111,7 @@ export const Table = ({tableLabels, tableHeaders, tableContent, createRowCallbac
 
 
     return(
-        <div>
+        <>
             <div className="quick__options--div">
                 <PaginationSelect
                     showRows = {showRows}
@@ -151,7 +152,7 @@ export const Table = ({tableLabels, tableHeaders, tableContent, createRowCallbac
                 showPage = {showPage}
                 setShowPage = {setShowPage}
             />
-        </div>
+        </>
     );
 
 }

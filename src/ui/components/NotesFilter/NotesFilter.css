@@ -1,0 +1,12 @@
+
+.activation__buttons--div{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    min-width: 50%;
+
+    margin-bottom: 1em;
+}
