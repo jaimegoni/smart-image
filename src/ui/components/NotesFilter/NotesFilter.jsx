@@ -8,10 +8,9 @@ import { Table } from '../Table/Table';
 import { NotesFilterRow } from './NotesFilterRow';
 
 
-export const NotesFilter = ({imageNotes})=>{
+export const NotesFilter = ({imageNotes, activeNotesKeys, setActiveNotesKeys})=>{
 
     const [isModalActive, setIsModalActive] = useState(false);
-    const [activeNotesKeys, setActiveNotesKeys] = useState([]);
 
     const activateAllNotes = ()=>{
         setActiveNotesKeys(imageNotes.map((note)=>(note.noteKey)));
@@ -33,7 +32,9 @@ export const NotesFilter = ({imageNotes})=>{
 
     return(
         <>
-            <button type='button' onClick={()=>{setIsModalActive(true)}} className='btn btn-secondary'>Filter</button>
+            <div className='filter__button--div'>
+                <button type='button' onClick={()=>{setIsModalActive(true)}} className='btn btn-secondary'>Filter notes</button>
+            </div>
             {
                 isModalActive
                     &&
@@ -68,5 +69,7 @@ export const NotesFilter = ({imageNotes})=>{
 }
 
 NotesFilter.propTypes = {
-    imageNotes : PropTypes.array.isRequired
+    imageNotes : PropTypes.array.isRequired,
+    activeNotesKeys : PropTypes.array.isRequired,
+    setActiveNotesKeys : PropTypes.func.isRequired
 }

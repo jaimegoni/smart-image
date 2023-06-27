@@ -7,17 +7,15 @@ import '../ImageNotes/ImageNotes.css';
 import { calculateImageDisplayDimensions } from "../../../core/services/RelativePositioningCalculations/CalculateImageDisplayDimensions";
 import { ImageVisualizationNote } from "../ImageNotes/ImageVisualizationNote";
 
-export const SmartImageVisualization = ({imageData})=>{
+export const SmartImageVisualization = ({imageData, activeNotes, setActiveNotes})=>{
     
     const imgContainerId = "smartImageImg";
 
     const [screenWidth, setScreenWidth] = useState(screen.width);
-    const [activeNotes, setActiveNotes] = useState([]);
     const [{offsetX, offsetY}, setContainerOffset] = useState({offsetX:0, offsetY:0});
     const [{imageDisplayWidth, imageDisplayHeight} , setDisplayDimensions] = useState(
         calculateImageDisplayDimensions(screenWidth, imageData.imageWidth, imageData.imageHeight)
     );
-
 
     const calculateContainerOffset = ()=>{
         const imgContainerDiv = document.getElementById(imgContainerId);
@@ -90,4 +88,6 @@ export const SmartImageVisualization = ({imageData})=>{
 
 SmartImageVisualization.propTypes = {
     imageData : PropTypes.object.isRequired,
+    activeNotes : PropTypes.array.isRequired,
+    setActiveNotes : PropTypes.func.isRequired
 }

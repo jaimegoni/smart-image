@@ -19,6 +19,8 @@ export const SmartImageView = ()=>{
 
     const [imageData, setImageData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+
+    const [activeNotesKeys, setActiveNotesKeys] = useState([]);
     
     useEffect(
         ()=>{
@@ -60,10 +62,14 @@ export const SmartImageView = ()=>{
                     </div>
                     <NotesFilter
                         imageNotes={imageData.imageNotes}
+                        activeNotesKeys={activeNotesKeys}
+                        setActiveNotesKeys={setActiveNotesKeys}
                     />
                     <div className="image__container--div">
                         <SmartImageVisualization
                             imageData = {imageData}
+                            activeNotes={activeNotesKeys}
+                            setActiveNotes={setActiveNotesKeys}
                         />
                     </div>
                 </>
