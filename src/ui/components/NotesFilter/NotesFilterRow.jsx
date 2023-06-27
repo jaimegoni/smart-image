@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import './NotesFilter.css';
 
+import { Tr, Td } from '../Table/';
+
 export const NotesFilterRow = ({note, activeNotesKeys, setActiveNotesKeys})=>{
 
     const toggleActiveNote = ()=>{
@@ -17,8 +19,8 @@ export const NotesFilterRow = ({note, activeNotesKeys, setActiveNotesKeys})=>{
     }
 
     return(
-        <tr key={"tr_" + note.noteKey}>
-            <td
+        <Tr key={"tr_" + note.noteKey}>
+            <Td
                 key={`td_${note.noteKey}_${0}`}
             >
                 {
@@ -28,18 +30,18 @@ export const NotesFilterRow = ({note, activeNotesKeys, setActiveNotesKeys})=>{
                             :
                     <input type='checkbox' onChange={toggleActiveNote}/>
                 }
-            </td>
-            <td
+            </Td>
+            <Td
                 key={`td_${note.noteKey}_${1}`}
             >
                 {note.noteTitle}
-            </td>
-            <td
+            </Td>
+            <Td
                 key={`td_${note.noteKey}_${2}`}
             >
                 {note.noteText}
-            </td>
-        </tr>
+            </Td>
+        </Tr>
     )
 }
 

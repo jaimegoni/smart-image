@@ -53,10 +53,10 @@ export const Table = ({tableLabels, tableHeaders, tableContent, createRowCallbac
 
                     tableHeaders.forEach((header) => {
 
-                        const valueToCheck = row[header].toString();
+                        const valueToCheck = row[header].toString().toLowerCase();
                         filtersToApply.forEach((filter)=>{
                             if (!(filter === "")){
-                                if(valueToCheck.includes(filter)){
+                                if(valueToCheck.includes(filter.toLowerCase())){
                                     passesFilter = true;
                                 }
                             }

@@ -29,3 +29,30 @@
     position: sticky;
     top: 0;
 }
+
+.head__tr{
+    background-color: lightgrey;
+    border: 1px solid grey;
+}
+
+.head__th{
+    border: 1px solid grey;
+    font-weight: bolder;
+}
+
+.head__th:hover{
+    cursor: pointer;
+    background-color: white;
+}
+
+.table__tr{
+    border: 1px solid grey;
+}
+
+.table__tr:hover{
+    background-color: lightpink;
+}
+
+.table__td{
+    border: 1px solid grey;
+}

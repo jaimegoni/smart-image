@@ -15,22 +15,23 @@ export const Thead = ({tableLabels, tableHeaders, sortColumn, sortColumnType, co
 
     return(
         <thead className="sticky__thead">
-            <tr key="HeaderRow" className="head__tr">
+            <tr key="HeaderRow" className='head__tr'>
                 {
                     tableHeaders.map(
                         (colHeader)=>(
                             <th
                                 key={colHeader}
                                 onClick={()=>{configureSort(colHeader)}}
+                                className="head__th"
                             >
                                 {   
                                     colHeader === sortColumn
                                             ?
                                     sortColumnType === "ascending"
                                             ?
-                                    "🔺" + getLabelFromHeader(colHeader)
+                                    getLabelFromHeader(colHeader) + " 🔺"
                                             :
-                                    "🔻" + getLabelFromHeader(colHeader)
+                                    getLabelFromHeader(colHeader) + " 🔻"
                                             :
                                     getLabelFromHeader(colHeader)
                                 }
