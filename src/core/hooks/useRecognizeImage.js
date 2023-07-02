@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-import { recognizeImage } from "./RecognizeImage";
+import { recognizeImage } from "../infrastructure/Tesseract/RecognizeImage";
 
 export const useRecognizeImage = (file, language = "eng") =>{
 

@@ -12,6 +12,8 @@ import { saveNote } from "../../../core/services/NotesSavingAndModifying/SaveNot
 import { saveNoteModification } from "../../../core/services/NotesSavingAndModifying/SaveNoteModification";
 import { deleteNote } from "../../../core/services/NotesSavingAndModifying/DeleteNote";
 import { ImageConfigurationNote } from "../ImageNotes/ImageConfigurationNote";
+import { useRecognizeImage } from "../../../core/hooks/useRecognizeImage";
+import { extractImageSlice } from "../../../core/services/ExtractImageSlice/ExtractImageSlice";
 
 export const SmartImageConfiguration = ({imageData, setImageData})=>{
     
@@ -29,6 +31,10 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
     const [noteText, setNoteText] = useState("");
 
     const { xInitial, yInitial, xFinal, yFinal, xCurrent, yCurrent } = useMouseClickPosition(imgContainerId);
+    
+    const [allowTextRecognition, setAllowTextRecognition] = useState(true);
+    const [imgToRecognize, setImgToRecognize] = useState(undefined);
+    const [isRecognizing, hasError, recognizedText] = useRecognizeImage(imgToRecognize);
     
     const calculateContainerOffset = ()=>{
         const imgContainerDiv = document.getElementById(imgContainerId);
@@ -98,6 +104,9 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
             if ((xFinal > xInitial) && (yFinal > yInitial)){
                 setShowTemporalSquare(true);
             }
+            if(allowTextRecognition){
+                extractImageSlice(imageData.b64image, 100, 100, 200, 200);
+            }
         }
         else{
             setShowTemporalSquare(false);
@@ -109,6 +118,7 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
         ()=>{
             window.addEventListener('resize', onResizeActions);
             calculateContainerOffset();
+
             return(
                 ()=>{
                     window.removeEventListener("resize", onResizeActions);
@@ -131,48 +141,48 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
                 }
             }
         >
-        <DraggingSquare
-            xInitial = {xInitial}
-            yInitial = {yInitial}
-            xCurrent = {xCurrent}
-            yCurrent = {yCurrent}
-        />
-        {
-            showTemporalSquare
-                &&
-            <>
-                <TemporalSquare
-                    xInitial = {xInitial}
-                    yInitial = {yInitial}
-                    xFinal = {xFinal}
-                    yFinal = {yFinal}
-                />
-                <ImageCreationNote
-                    xPosition = { xFinal + 5}
-                    yPosition = { yInitial }
-                    setShowTemporalSquare = {setShowTemporalSquare}
-                    setNoteTitle = {setNoteTitle}
-                    setNoteText = {setNoteText}
-                    onSaveNote = {onSaveNote}
-                />
-            </>
-        }
-        {
-            imageData.imageNotes.map((note)=>(
-                <ImageConfigurationNote
-                    key={note.noteKey}
-                    imageNote = {note}
-                    onModifyNote = {onModifyNote}
-                    onDeleteNote = {onDeleteNote}
-                    imageNaturalWidth = {imageData.imageWidth}
-                    imageNaturalHeight = {imageData.imageHeight}
-                    imageDisplayWidth = {imageDisplayWidth}
-                    imageDisplayHeight = {imageDisplayHeight}
-                    imageOffsetX = {offsetX}
-                    imageOffsetY = {offsetY}
-                />
-            ))
-        }
+            <DraggingSquare
+                xInitial = {xInitial}
+                yInitial = {yInitial}
+                xCurrent = {xCurrent}
+                yCurrent = {yCurrent}
+            />
+            {
+                showTemporalSquare
+                    &&
+                <>
+                    <TemporalSquare
+                        xInitial = {xInitial}
+                        yInitial = {yInitial}
+                        xFinal = {xFinal}
+                        yFinal = {yFinal}
+                    />
+                    <ImageCreationNote
+                        xPosition = { xFinal + 5}
+                        yPosition = { yInitial }
+                        setShowTemporalSquare = {setShowTemporalSquare}
+                        setNoteTitle = {setNoteTitle}
+                        setNoteText = {setNoteText}
+                        onSaveNote = {onSaveNote}
+                    />
+                </>
+            }
+            {
+                imageData.imageNotes.map((note)=>(
+                    <ImageConfigurationNote
+                        key={note.noteKey}
+                        imageNote = {note}
+                        onModifyNote = {onModifyNote}
+                        onDeleteNote = {onDeleteNote}
+                        imageNaturalWidth = {imageData.imageWidth}
+                        imageNaturalHeight = {imageData.imageHeight}
+                        imageDisplayWidth = {imageDisplayWidth}
+                        imageDisplayHeight = {imageDisplayHeight}
+                        imageOffsetX = {offsetX}
+                        imageOffsetY = {offsetY}
+                    />
+                ))
+            }
         </div>
     )
 
