@@ -3,19 +3,13 @@ import PropTypes from 'prop-types';
 
 import './ImageNotes.css';
 
-import { calculateSquareDisplayCoordinates } from "../../../core/services/RelativePositioningCalculations/CalculateSquareDisplayCoordinates";
-
 export const ImageConfigurationNote = (
     {
         imageNote,
         onModifyNote,
         onDeleteNote,
-        imageNaturalWidth,
-        imageNaturalHeight,
-        imageDisplayWidth,
-        imageDisplayHeight,
-        imageOffsetX,
-        imageOffsetY,
+        positioningParams,
+        calculateDisplaySquare
     }
     )=>{
 
@@ -41,25 +35,23 @@ export const ImageConfigurationNote = (
     const [{initialX, initialY, finalX, finalY} , setAnchorCoordinates] = useState( defaultCoordinates );
     const [anchorSquareStyle, setAnchorSquareStyle ] = useState(defaultAnchorStyle);
     
-    useEffect(
-        ()=>{
-            if(!(imageOffsetX === 0) && !(imageOffsetY === 0)){
-                const squareCoordinates = calculateSquareDisplayCoordinates(
-                    imageNaturalWidth,
-                    imageNaturalHeight,
-                    imageDisplayWidth,
-                    imageDisplayHeight,
-                    imageOffsetX,
-                    imageOffsetY,
-                    imageNote.xNaturalInitial,
-                    imageNote.yNaturalInitial,
-                    imageNote.xNaturalFinal,
-                    imageNote.yNaturalFinal
-                );
-                setAnchorCoordinates(squareCoordinates);
+    useState(()=>{
+        const [iX, iY, fX, fY] = calculateDisplaySquare(
+            imageNote.xNaturalInitial,
+            imageNote.yNaturalInitial,
+            imageNote.xNaturalFinal,
+            imageNote.yNaturalFinal
+
+        );
+        setAnchorCoordinates(
+            {
+                initialX: iX,
+                initialY: iY,
+                finalX: fX,
+                finalY: fY
             }
-        }
-        ,[imageOffsetX, imageOffsetY]);
+        );
+    },[positioningParams.offsetX, positioningParams.offsetY])
 
     useEffect(
         ()=>{
@@ -119,10 +111,6 @@ ImageConfigurationNote.propTypes = {
     imageNote : PropTypes.object.isRequired,
     onModifyNote : PropTypes.func.isRequired,
     onDeleteNote : PropTypes.func.isRequired,
-    imageNaturalWidth : PropTypes.number.isRequired,
-    imageNaturalHeight : PropTypes.number.isRequired,
-    imageDisplayWidth : PropTypes.number.isRequired,
-    imageDisplayHeight : PropTypes.number.isRequired,
-    imageOffsetX : PropTypes.number.isRequired,
-    imageOffsetY : PropTypes.number.isRequired
+    positioningParams: PropTypes.object.isRequired,
+    calculateDisplaySquare : PropTypes.func.isRequired
 }

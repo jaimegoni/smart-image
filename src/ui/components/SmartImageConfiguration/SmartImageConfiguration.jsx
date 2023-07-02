@@ -14,6 +14,7 @@ import { deleteNote } from "../../../core/services/NotesSavingAndModifying/Delet
 import { ImageConfigurationNote } from "../ImageNotes/ImageConfigurationNote";
 import { useRecognizeImage } from "../../../core/hooks/useRecognizeImage";
 import { extractImageSlice } from "../../../core/services/ExtractImageSlice/ExtractImageSlice";
+import { useRelativePositioningCalculations } from "../../../core/hooks/useRelativePositioningCalculations";
 
 export const SmartImageConfiguration = ({imageData, setImageData})=>{
     
@@ -31,11 +32,12 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
     const [noteText, setNoteText] = useState("");
 
     const { xInitial, yInitial, xFinal, yFinal, xCurrent, yCurrent } = useMouseClickPosition(imgContainerId);
+    const [positioningParams, calculateNaturalXYPoint, calculateDisplaySquare] = useRelativePositioningCalculations(offsetX, offsetY, imageDisplayWidth, imageDisplayHeight, imageData);
     
     const [allowTextRecognition, setAllowTextRecognition] = useState(true);
     const [imgToRecognize, setImgToRecognize] = useState(undefined);
     const [isRecognizing, hasError, recognizedText] = useRecognizeImage(imgToRecognize);
-    
+
     const calculateContainerOffset = ()=>{
         const imgContainerDiv = document.getElementById(imgContainerId);
         setContainerOffset(
@@ -52,16 +54,15 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
     }
 
     const onSaveNote = ()=>{
+        const [xNaturalInitial, yNaturalInitial] = calculateNaturalXYPoint(xInitial, yInitial);
+        const [xNaturalFinal, yNaturalFinal] = calculateNaturalXYPoint(xFinal, yFinal);
+
         const newImageData = saveNote(
             imageData,
-            xInitial,
-            yInitial,
-            xFinal,
-            yFinal,
-            offsetX,
-            offsetY,
-            imageDisplayWidth,
-            imageDisplayHeight,
+            xNaturalInitial,
+            xNaturalFinal,
+            yNaturalInitial,
+            yNaturalFinal,
             noteTilte,
             noteText
         );
@@ -174,12 +175,8 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
                         imageNote = {note}
                         onModifyNote = {onModifyNote}
                         onDeleteNote = {onDeleteNote}
-                        imageNaturalWidth = {imageData.imageWidth}
-                        imageNaturalHeight = {imageData.imageHeight}
-                        imageDisplayWidth = {imageDisplayWidth}
-                        imageDisplayHeight = {imageDisplayHeight}
-                        imageOffsetX = {offsetX}
-                        imageOffsetY = {offsetY}
+                        positioningParams = {positioningParams}
+                        calculateDisplaySquare = {calculateDisplaySquare}
                     />
                 ))
             }
