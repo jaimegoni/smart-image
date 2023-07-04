@@ -5,7 +5,7 @@ import { PropTypes } from 'prop-types';
 import "./SmartImageConfiguration.css"
 
 import { calculateImageDisplayDimensions } from "../../../core/services/RelativePositioningCalculations/CalculateImageDisplayDimensions";
-import { DraggingSquare } from "../ImageNotes/DraggingSquare";
+import { DraggingSquare } from "../ImageNotes/Components/Sqares/DraggingSquare";
 import { TemporalSquare } from "../ImageNotes/TemporalSquare";
 import { ImageCreationNote } from "../ImageNotes/ImageCreationNote";
 import { saveNote } from "../../../core/services/NotesSavingAndModifying/SaveNote";
@@ -114,12 +114,11 @@ export const SmartImageConfiguration = ({imageData, setImageData})=>{
         }
     }
     ,[xFinal, yFinal])
-
+    
     useEffect(
         ()=>{
-            window.addEventListener('resize', onResizeActions);
             calculateContainerOffset();
-
+            window.addEventListener('resize', onResizeActions);
             return(
                 ()=>{
                     window.removeEventListener("resize", onResizeActions);

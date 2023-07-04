@@ -1,0 +1,34 @@
+.dragged__square--div{
+    background-color: rgba(0, 0, 255, 0.3);
+    border: 2px solid blue;
+}
+
+
+.active__square--div{
+    background-color: rgba(255, 0, 0, 0.3);
+    border: 2px solid red;
+}
+
+.active__square--div:hover{
+    cursor: pointer;
+    border: 2px solid rgba(128, 0, 255);
+}
+
+.configuration__square--div{
+    background-color: rgba(128, 0, 255, 0.3);
+    border: 2px solid rgba(128, 0, 255);
+}
+
+.configuration__square--div:hover{
+    cursor: pointer;
+    border-color: red;
+}
+
+.visualization__square--div{
+    background-color: rgba(128, 0, 255, 0);
+}
+.visualization__square--div:hover{
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0.3);
+    border: 2px solid red;
+}

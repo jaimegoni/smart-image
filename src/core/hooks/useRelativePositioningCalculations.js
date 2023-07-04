@@ -1,41 +1,16 @@
 
-import { useEffect, useState } from "react"
 import { calculateNaturalPoint } from "../services/RelativePositioningCalculations/CalculateNaturalPoint"
 
 import { calculateDisplayPositionOnImage } from "../services/RelativePositioningCalculations/CalculateDisplayPositionOnImage"
 
 export const useRelativePositioningCalculations = (containerOffsetX, containerOffsetY, imageDisplayWidth, imageDisplayHeight, imageData)=>{
-
-    const [{ offsetX, offsetY, displayWidth, displayHeight, realWidth, realHeight}, setPositioningParams] = useState({
-        offsetX: containerOffsetX,
-        offsetY: containerOffsetY,
-        displayWidth: imageDisplayWidth,
-        displayHeight: imageDisplayHeight,
-        realWidth: imageData.imageWidth,
-        realHeight: imageData.imageHeight,
-    })
-
-    useEffect(()=>{
-        setPositioningParams(
-            {
-                offsetX: containerOffsetX,
-                offsetY:containerOffsetY,
-                displayWidth,
-                displayHeight,
-                realWidth,
-                realHeight
-            }
-        )
-    },[containerOffsetX, containerOffsetY])
-
-    useEffect(()=>{
-        setPositioningParams(
-            {
-                displayWidth: imageDisplayWidth,
-                displayHeight: imageDisplayHeight,
-            }
-        )
-    },[imageDisplayWidth, imageDisplayHeight])
+    
+    const offsetX= containerOffsetX
+    const offsetY= containerOffsetY
+    const displayWidth= imageDisplayWidth
+    const displayHeight= imageDisplayHeight
+    const realWidth= imageData.imageWidth
+    const realHeight= imageData.imageHeight
 
     const calculateNaturalXYPoint = (xClickedPosition, yClickedPosition)=>{
         const xPos = calculateNaturalPoint(xClickedPosition, offsetX, displayWidth, realWidth);

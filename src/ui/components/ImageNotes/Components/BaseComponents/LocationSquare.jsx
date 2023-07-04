@@ -1,12 +1,12 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import "./ImageNotes.css";
+import './LocationSquare.css';
 
-export const DraggingSquare = ({xInitial, yInitial, xCurrent, yCurrent, isDragging=true})=>{
+export const LocationSquare = ({xInitial, yInitial, xCurrent, yCurrent, className, onClickFunction})=>{
 
-    const resetDraggedSquareStyle = {
+    const defaultStyle = {
         "display": "none",
         "left": "0px",
         "top": "0px",
@@ -14,12 +14,12 @@ export const DraggingSquare = ({xInitial, yInitial, xCurrent, yCurrent, isDraggi
         "height": "0px"
     }
 
-    const [draggedSquareStyle, setDraggedSquareStyle] = useState(resetDraggedSquareStyle);
+    const [locationSquareStyle, setLocationSquareStyle] = useState(defaultStyle);
 
     useEffect(()=>{
         if (!(xCurrent === 0) && !(yCurrent === 0)){
             if(!(xInitial === xCurrent) && !(yInitial === yCurrent)){
-                setDraggedSquareStyle(
+                setLocationSquareStyle(
                     {
                         "display": "block",
                         "left": xInitial + "px",
@@ -29,18 +29,22 @@ export const DraggingSquare = ({xInitial, yInitial, xCurrent, yCurrent, isDraggi
                     }
                 );
             }
+            else{
+                setLocationSquareStyle(defaultStyle);
+            }
         }
         else{
-            setDraggedSquareStyle(resetDraggedSquareStyle);
+            setLocationSquareStyle(defaultStyle);
         }
     }
     ,[ xCurrent, yCurrent])
 
-    if(draggedSquareStyle.display === "block"){
+    if(locationSquareStyle.display === "block"){
         return(
             <div
-                className={isDragging ? "dragged__square--div" : "active__square--div"}
-                style={draggedSquareStyle}
+                className={`location__square--div ${className}`}    
+                style={locationSquareStyle}
+                onClick={onClickFunction}
             ></div>
         )
     }
@@ -50,10 +54,11 @@ export const DraggingSquare = ({xInitial, yInitial, xCurrent, yCurrent, isDraggi
 
 }
 
-DraggingSquare.propTypes = {
+LocationSquare.propTypes = {
     xInitial : PropTypes.number.isRequired,
     yInitial : PropTypes.number.isRequired,
     xCurrent : PropTypes.number.isRequired,
     yCurrent : PropTypes.number.isRequired,
-    isDragging : PropTypes.bool
+    className : PropTypes.string.isRequired,
+    onClickFunction : PropTypes.func.isRequired
 }
