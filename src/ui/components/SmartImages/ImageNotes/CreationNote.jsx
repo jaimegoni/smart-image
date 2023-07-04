@@ -1,13 +1,13 @@
 
 import PropTypes from 'prop-types';
 
-import { saveNote } from '../../../core/services/NotesSavingAndModifying';
-import { calculateSquareNaturalCoordinates } from '../../../core/services/RelativePositioningCalculations';
+import { saveNote } from '../../../../core/services/NotesSavingAndModifying';
+import { calculateSquareNaturalCoordinates } from '../../../../core/services/RelativePositioningCalculations';
 
 import { CreationSquare, CreationForm } from './Components';
 
 
-export const CreationNote = ({ initialX, initialY, finalX, finalY, canvasParameters, imageData, setImageData, setShowTemporalSquare })=>{
+export const CreationNote = ({ initialX, initialY, finalX, finalY, divImageParameters, imageData, setImageData, setShowTemporalNote })=>{
 
     const onSaveNote = (noteTitle, noteText)=>{
         const [xNaturalInitial, yNaturalInitial, xNaturalFinal, yNaturalFinal] = calculateSquareNaturalCoordinates(
@@ -15,10 +15,10 @@ export const CreationNote = ({ initialX, initialY, finalX, finalY, canvasParamet
             initialY,
             finalX,
             finalY,
-            canvasParameters.xCanvasOffset,
-            canvasParameters.yCanvasOffset,
-            canvasParameters.canvasWidth,
-            canvasParameters.canvasHeight,
+            divImageParameters.xOffset,
+            divImageParameters.yOffset,
+            divImageParameters.width,
+            divImageParameters.height,
             imageData.imageWidth,
             imageData.imageHeight
         )
@@ -33,7 +33,7 @@ export const CreationNote = ({ initialX, initialY, finalX, finalY, canvasParamet
             noteText
         );
         setImageData(newImageData);
-        setShowTemporalSquare(false);
+        setShowTemporalNote(false);
         
     }
 
@@ -49,7 +49,7 @@ export const CreationNote = ({ initialX, initialY, finalX, finalY, canvasParamet
                 xPosition = { finalX + 10}
                 yPosition = { initialY }
                 onSaveNote = { onSaveNote }
-                setShowTemporalSquare = { setShowTemporalSquare }
+                setShowTemporalNote = { setShowTemporalNote }
             />
         </>
     )
@@ -61,15 +61,15 @@ CreationNote.propTypes = {
     initialY: PropTypes.number.isRequired,
     finalX: PropTypes.number.isRequired,
     finalY: PropTypes.number.isRequired,
-    canvasParameters: PropTypes.shape(
+    divImageParameters: PropTypes.shape(
         {
-            xCanvasOffset: PropTypes.number.isRequired,
-            yCanvasOffset: PropTypes.number.isRequired,
-            canvasWidth: PropTypes.number.isRequired,
-            canvasHeight: PropTypes.number.isRequired
+            xOffset: PropTypes.number.isRequired,
+            yOffset: PropTypes.number.isRequired,
+            width: PropTypes.number.isRequired,
+            height: PropTypes.number.isRequired
         }
     ),
     imageData: PropTypes.object.isRequired,
     setImageData: PropTypes.func.isRequired,
-    setShowTemporalSquare: PropTypes.func.isRequired
+    setShowTemporalNote: PropTypes.func.isRequired
 }

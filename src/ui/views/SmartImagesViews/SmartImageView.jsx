@@ -6,10 +6,10 @@ import "./SmartImageViews.css"
 import { getStoredImageByKey } from "../../../core/services/ImagesRegister/GetStoredImageByKey";
 
 import { StandardView } from "../../templates/StandardView/StandardView";
-import { SmartImageVisualization } from "../../components/SmartImageVisualization/SmartImageVisualization";
 
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { NotesFilter } from "../../components/NotesFilter/NotesFilter";
+import { VisualizationSmartImage } from "../../components/SmartImages";
 
 
 
@@ -66,10 +66,8 @@ export const SmartImageView = ()=>{
                         setActiveNotesKeys={setActiveNotesKeys}
                     />
                     <div className="image__container--div">
-                        <SmartImageVisualization
+                        <VisualizationSmartImage
                             imageData = {imageData}
-                            activeNotes={activeNotesKeys}
-                            setActiveNotes={setActiveNotesKeys}
                         />
                     </div>
                 </>

@@ -1,0 +1,10 @@
+
+.note__visualization--div{
+    margin-top: 0.25em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    min-width: fit-content;
+}

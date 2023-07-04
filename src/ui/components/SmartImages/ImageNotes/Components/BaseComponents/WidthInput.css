@@ -1,0 +1,15 @@
+
+.image__width--div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 8px;
+}
+
+
+.image__width--input{
+    max-width: 5em;
+
+    margin-left: 1em;
+}

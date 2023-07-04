@@ -3,19 +3,19 @@ import { useState } from 'react';
 import PropTypes from 'prop-types'
 
 import { ConfigurationForm, ConfigurationSquare } from "./Components";
-import { deleteNote, saveNoteModification } from '../../../core/services/NotesSavingAndModifying';
-import { calculateSquareDisplayCoordinates } from '../../../core/services/RelativePositioningCalculations';
+import { deleteNote, saveNoteModification } from '../../../../core/services/NotesSavingAndModifying';
+import { calculateSquareDisplayCoordinates } from '../../../../core/services/RelativePositioningCalculations';
 
 
-export const ConfigurationNote = ({imageData, imageNote, canvasParameters, setImageData})=>{
+export const ConfigurationNote = ({imageData, imageNote, divImageParameters, setImageData})=>{
 
     const { initialX, initialY, finalX, finalY } = calculateSquareDisplayCoordinates(
         imageData.imageWidth,
         imageData.imageHeight,
-        canvasParameters.canvasWidth,
-        canvasParameters.canvasHeight,
-        canvasParameters.xCanvasOffset,
-        canvasParameters.yCanvasOffset,
+        divImageParameters.width,
+        divImageParameters.height,
+        divImageParameters.xOffset,
+        divImageParameters.yOffset,
         imageNote.xNaturalInitial,
         imageNote.yNaturalInitial,
         imageNote.xNaturalFinal,
@@ -76,12 +76,12 @@ export const ConfigurationNote = ({imageData, imageNote, canvasParameters, setIm
 ConfigurationNote.propTypes = {
     imageData: PropTypes.object.isRequired,
     imageNote: PropTypes.object.isRequired,
-    canvasParameters: PropTypes.shape(
+    divImageParameters: PropTypes.shape(
         {
-            xCanvasOffset: PropTypes.number.isRequired,
-            yCanvasOffset: PropTypes.number.isRequired,
-            canvasWidth: PropTypes.number.isRequired,
-            canvasHeight: PropTypes.number.isRequired
+            xOffset: PropTypes.number.isRequired,
+            yOffset: PropTypes.number.isRequired,
+            width: PropTypes.number.isRequired,
+            height: PropTypes.number.isRequired
         }
     ),
     setImageData: PropTypes.func.isRequired

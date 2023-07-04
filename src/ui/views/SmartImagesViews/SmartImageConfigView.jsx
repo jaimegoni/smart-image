@@ -7,7 +7,8 @@ import { getStoredImageByKey } from "../../../core/services/ImagesRegister/GetSt
 
 import { StandardView } from "../../templates/StandardView/StandardView";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { SmartImageConfiguration } from "../../components/SmartImageConfiguration/SmartImageConfiguration";
+
+import { ConfigurationSmartImage } from "../../components/SmartImages";
 
 
 export const SmartImageConfigView = ()=>{
@@ -58,7 +59,7 @@ export const SmartImageConfigView = ()=>{
 
                     </div>
                     <div className="image__container--div">
-                        <SmartImageConfiguration
+                        <ConfigurationSmartImage
                             imageData = {imageData}
                             setImageData = { setImageData }
                         />
