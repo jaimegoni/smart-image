@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { VisualizationSquare, Note } from "./Components";
 import { calculateSquareDisplayCoordinates } from '../../../../core/services/RelativePositioningCalculations';
 
-export const VisualizationNote = ({imageData, imageNote, divImageParameters})=>{
+export const VisualizationNote = ({imageData, imageNote, divImageParameters, activeNotesKeys, setActiveNotesKeys})=>{
 
     const [{ initialX, initialY, finalX, finalY }, setSquareCoordinates] = useState(
         {
@@ -17,6 +17,24 @@ export const VisualizationNote = ({imageData, imageNote, divImageParameters})=>{
     )
 
     const [isNoteActive, setIsNoteActive] = useState(false);
+
+    const setNoteActive = (isActive)=>{
+
+        setIsNoteActive(isActive);
+
+        if (!(activeNotesKeys.includes(imageNote.noteKey))){
+            setActiveNotesKeys([...activeNotesKeys, imageNote.noteKey])
+        }
+        else{
+            setActiveNotesKeys(activeNotesKeys.filter((noteKey)=>(!(noteKey === imageNote.noteKey))));
+        }
+    }
+    
+    useEffect(()=>{
+        if (activeNotesKeys.includes(imageNote.noteKey)){
+            setIsNoteActive(true);
+        }
+    },[activeNotesKeys])
 
     useEffect(()=>{
         setSquareCoordinates(
@@ -43,7 +61,7 @@ export const VisualizationNote = ({imageData, imageNote, divImageParameters})=>{
                 xFinal = { finalX }
                 yFinal = { finalY }
                 isActive = {isNoteActive}
-                setIsActive = {setIsNoteActive}
+                setIsActive = {setNoteActive}
             />
             {
                 isNoteActive
@@ -52,7 +70,7 @@ export const VisualizationNote = ({imageData, imageNote, divImageParameters})=>{
                 xPosition = { finalX + 10}
                 yPosition = { initialY }
                 imageNote = {imageNote}
-                setIsActive = {setIsNoteActive}
+                setIsActive = {setNoteActive}
             />
             }
         </>
@@ -69,5 +87,7 @@ VisualizationNote.propTypes = {
             width: PropTypes.number.isRequired,
             height: PropTypes.number.isRequired
         }
-    )
+    ),
+    activeNotesKeys: PropTypes.array.isRequired,
+    setActiveNotesKeys: PropTypes.func.isRequired
 }

@@ -30,6 +30,10 @@ export const SmartImageView = ()=>{
         ,[imageKey]
     )
 
+    useEffect(()=>{
+        console.log(activeNotesKeys);
+    },[activeNotesKeys])
+
     return(
         <StandardView>
             {
@@ -68,6 +72,8 @@ export const SmartImageView = ()=>{
                     <div className="image__container--div">
                         <VisualizationSmartImage
                             imageData = {imageData}
+                            activeNotesKeys = {activeNotesKeys}
+                            setActiveNotesKeys = {setActiveNotesKeys}
                         />
                     </div>
                 </>

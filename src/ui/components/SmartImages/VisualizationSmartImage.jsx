@@ -6,7 +6,7 @@ import { DivImage } from "./DivImage/DivImage";
 import { VisualizationNote } from './ImageNotes/VisualizationNote'
 import { WidthInput } from "./ImageNotes/Components";
 
-export const VisualizationSmartImage = ({imageData})=>{
+export const VisualizationSmartImage = ({imageData, activeNotesKeys, setActiveNotesKeys})=>{
 
     const imgContainerId = "smartImagePictureDiv";
     const screenWidthFactor = 0.9;
@@ -85,6 +85,8 @@ export const VisualizationSmartImage = ({imageData})=>{
                             imageData = {imageData}
                             imageNote = {note}
                             divImageParameters = {divImageParameters}
+                            activeNotesKeys = {activeNotesKeys}
+                            setActiveNotesKeys = {setActiveNotesKeys}
                         />
                     )
                     )
@@ -95,5 +97,7 @@ export const VisualizationSmartImage = ({imageData})=>{
 }
 
 VisualizationSmartImage.propTypes = {
-    imageData: PropTypes.object.isRequired
+    imageData: PropTypes.object.isRequired,
+    activeNotesKeys: PropTypes.array.isRequired,
+    setActiveNotesKeys: PropTypes.func.isRequired
 }
