@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const useMouseClickPosition = (IdOfElementToInteractWith, onMouseDownCallback = ()=>{}, onMouseUpCallback = ()=>{})=>{
+export const useMouseClickPosition = (IdOfElementToInteractWith, onMouseDownCallback=()=>{}, onMouseUpCallback=()=>{})=>{
 
     let isClicking = false;
 
@@ -13,6 +13,8 @@ export const useMouseClickPosition = (IdOfElementToInteractWith, onMouseDownCall
 
         const clickedElementId = event.target.id;
         if (clickedElementId === IdOfElementToInteractWith){
+            onMouseDownCallback();
+
             setInitialCoordinates(
                 {
                     xInitial: Math.round(event.pageX),
@@ -33,11 +35,12 @@ export const useMouseClickPosition = (IdOfElementToInteractWith, onMouseDownCall
             );
             isClicking = true;
         }
-        onMouseDownCallback();
     }
 
     const onMouseUp = (event)=>{
         if (isClicking){
+            onMouseUpCallback();
+            
             setFinalCoordinates(
                 {
                     xFinal : Math.round(event.pageX),
@@ -51,9 +54,7 @@ export const useMouseClickPosition = (IdOfElementToInteractWith, onMouseDownCall
                 }
             );
             isClicking = false;
-
         }
-        onMouseUpCallback();
     }
 
     const onMouseMove = (event) =>{

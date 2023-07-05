@@ -7,33 +7,37 @@ import { calculateSquareNaturalCoordinates } from '../../../../core/services/Rel
 import { CreationSquare, CreationForm } from './Components';
 
 
-export const CreationNote = ({ initialX, initialY, finalX, finalY, divImageParameters, imageData, setImageData, setShowTemporalNote })=>{
+export const CreationNote = ({ initialX, initialY, finalX, finalY, divImageParameters, imageData, setImageData, setShowCreationNote })=>{
 
     const onSaveNote = (noteTitle, noteText)=>{
-        const [xNaturalInitial, yNaturalInitial, xNaturalFinal, yNaturalFinal] = calculateSquareNaturalCoordinates(
-            initialX,
-            initialY,
-            finalX,
-            finalY,
-            divImageParameters.xOffset,
-            divImageParameters.yOffset,
-            divImageParameters.width,
-            divImageParameters.height,
-            imageData.imageWidth,
-            imageData.imageHeight
-        )
 
-        const newImageData = saveNote(
-            imageData,
-            xNaturalInitial,
-            xNaturalFinal,
-            yNaturalInitial,
-            yNaturalFinal,
-            noteTitle,
-            noteText
-        );
-        setImageData(newImageData);
-        setShowTemporalNote(false);
+        if (!(noteTitle === "")){
+            const [xNaturalInitial, yNaturalInitial, xNaturalFinal, yNaturalFinal] = calculateSquareNaturalCoordinates(
+                initialX,
+                initialY,
+                finalX,
+                finalY,
+                divImageParameters.xOffset,
+                divImageParameters.yOffset,
+                divImageParameters.width,
+                divImageParameters.height,
+                imageData.imageWidth,
+                imageData.imageHeight
+            )
+    
+            const newImageData = saveNote(
+                imageData,
+                xNaturalInitial,
+                xNaturalFinal,
+                yNaturalInitial,
+                yNaturalFinal,
+                noteTitle,
+                noteText
+            );
+            setImageData(newImageData);
+        }
+
+        setShowCreationNote(false);
         
     }
 
@@ -49,7 +53,7 @@ export const CreationNote = ({ initialX, initialY, finalX, finalY, divImageParam
                 xPosition = { finalX + 10}
                 yPosition = { initialY }
                 onSaveNote = { onSaveNote }
-                setShowTemporalNote = { setShowTemporalNote }
+                setShowCreationNote = { setShowCreationNote }
             />
         </>
     )
@@ -71,5 +75,5 @@ CreationNote.propTypes = {
     ),
     imageData: PropTypes.object.isRequired,
     setImageData: PropTypes.func.isRequired,
-    setShowTemporalNote: PropTypes.func.isRequired
+    setShowCreationNote: PropTypes.func.isRequired
 }

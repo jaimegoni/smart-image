@@ -24,6 +24,4 @@ CreationSquare.propTypes = {
     yInitial : PropTypes.number.isRequired,
     xFinal : PropTypes.number.isRequired,
     yFinal : PropTypes.number.isRequired,
-    isActive : PropTypes.bool.isRequired,
-    setIsActive: PropTypes.func.isRequired
 }

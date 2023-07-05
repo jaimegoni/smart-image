@@ -7,26 +7,36 @@ import { DivImage } from "./DivImage/DivImage";
 import { DraggingSquare } from "./ImageNotes/Components";
 import { CreationNote } from "./ImageNotes/CreationNote";
 import { ConfigurationNote } from "./ImageNotes/ConfigurationNote";
+import { WidthInput } from "./ImageNotes/Components";
 
 export const ConfigurationSmartImage = ({imageData, setImageData})=>{
 
     const imgContainerId = "smartImagePictureDiv";
+    const screenWidthFactor = 0.9;
 
-    const { xInitial, yInitial, xFinal, yFinal, xCurrent, yCurrent} = useMouseClickPosition( imgContainerId , onMouseDownCallback, onMouseUpCallback);
+    const [screenWidth, setScreenWidth] = useState(screen.width);
+    const [maxImageDisplayWidth, setMaxImageDisplayWidth] = useState(Math.min(screenWidthFactor*screenWidth, imageData.imageWidth));
+    const [displayWidth, setDisplayWidth] = useState(maxImageDisplayWidth);
+
+    const [showCreationNote, setShowCreationNote] = useState(false);
     const [divImageParameters, setDivImageParameters] = useState(
         {
             xOffset: 0,
             yOffset: 0,
-            width: imageData.imageWidth,
-            height: imageData.imageHeight
+            width: maxImageDisplayWidth,
+            height: Math.round(maxImageDisplayWidth*imageData.imageHeight / imageData.imageWidth)
         }
     )
 
-    const [showCreationNote, setShowCreationNote] = useState(false);
-    const [showDraggingSquare, setShowDraggingSquare] = useState(false);
+    const onMouseDownCallback = ()=>{
+        setShowCreationNote(false);
+    }
 
-    const onMouseDownCallback = ()=>{setShowDraggingSquare(true); setShowCreationNote(false)};
-    const onMouseUpCallback = ()=>{setShowDraggingSquare(false); setShowCreationNote(true)};
+    const onResizeActions = ()=>{
+        setScreenWidth(screen.width);
+        setMaxImageDisplayWidth(Math.min(screenWidthFactor*screenWidth, imageData.imageWidth));
+        calculateContainerOffset();
+    }
 
     const calculateContainerOffset = ()=>{
         const imgContainerDiv = document.getElementById(imgContainerId);
@@ -39,27 +49,60 @@ export const ConfigurationSmartImage = ({imageData, setImageData})=>{
         );
     }
 
+    const { xInitial, yInitial, xFinal, yFinal, xCurrent, yCurrent} = useMouseClickPosition(imgContainerId, onMouseDownCallback);
+
     useEffect(
         ()=>{
             calculateContainerOffset();
-            window.addEventListener('resize', calculateContainerOffset);
+            window.addEventListener('resize', onResizeActions);
             return(
                 ()=>{
-                    window.removeEventListener("resize", calculateContainerOffset);
+                    window.removeEventListener("resize", onResizeActions);
                 }
                 );
         }
     ,[])
 
+    useEffect(()=>{
+
+        if(divImageParameters.xOffset > 0){
+            setDivImageParameters({
+                ...divImageParameters,
+                width: displayWidth,
+                height: Math.round(displayWidth*imageData.imageHeight / imageData.imageWidth)
+            })
+        }
+    },[displayWidth])
+    
+    useEffect(()=>{
+
+        if (!(xFinal === 0) && !(yFinal === 0)){
+            if ((xFinal > xInitial) && (yFinal > yInitial)){
+                setShowCreationNote(true);
+            }
+        }
+        else{
+            setShowCreationNote(false);
+        }
+    }
+    ,[xFinal, yFinal])
+
     return(
+        <>
+        
+        <WidthInput
+                displayWidth = {displayWidth}
+                setDisplayWidth = {setDisplayWidth}
+                maxImageDisplayWidth = {maxImageDisplayWidth}
+            />
         <DivImage
             imgContainerId = {imgContainerId}
             imageData = {imageData}
-            displayWidth = {imageData.imageWidth}
-            displayHeight = {imageData.imageHeight}
+            displayWidth = {divImageParameters.width}
+            displayHeight = {divImageParameters.height}
         >
             {
-                showDraggingSquare
+                ((xCurrent > 0) && (yCurrent > 0))
                     &&
                 <DraggingSquare
                     xInitial = {xInitial}
@@ -96,6 +139,7 @@ export const ConfigurationSmartImage = ({imageData, setImageData})=>{
                 )
             }
         </DivImage>
+        </>
     )
 }
 

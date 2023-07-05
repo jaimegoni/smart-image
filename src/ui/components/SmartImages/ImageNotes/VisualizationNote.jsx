@@ -34,6 +34,9 @@ export const VisualizationNote = ({imageData, imageNote, divImageParameters, act
         if (activeNotesKeys.includes(imageNote.noteKey)){
             setIsNoteActive(true);
         }
+        else{
+            setIsNoteActive(false);
+        }
     },[activeNotesKeys])
 
     useEffect(()=>{

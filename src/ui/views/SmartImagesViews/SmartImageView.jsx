@@ -30,10 +30,6 @@ export const SmartImageView = ()=>{
         ,[imageKey]
     )
 
-    useEffect(()=>{
-        console.log(activeNotesKeys);
-    },[activeNotesKeys])
-
     return(
         <StandardView>
             {
