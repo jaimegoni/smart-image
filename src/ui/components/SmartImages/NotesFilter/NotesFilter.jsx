@@ -3,22 +3,17 @@ import PropTypes from 'prop-types';
 
 import './NotesFilter.css';
 
-import { LargeModalDialog, ModalBody, ModalFooter } from '../Modal';
-import { Table } from '../Table/Table';
+import { LargeModalDialog, ModalBody, ModalFooter } from '../../Modal';
+import { Table } from '../../Table/Table';
 import { NotesFilterRow } from './NotesFilterRow';
+import { ActivateAllNotesButton } from './ActivateAllNotesButton';
+import { DeactivateAllNotesButton } from './DeactivateAllNotesButton';
 
 
 export const NotesFilter = ({imageNotes, activeNotesKeys, setActiveNotesKeys})=>{
 
     const [isModalActive, setIsModalActive] = useState(false);
 
-    const activateAllNotes = ()=>{
-        setActiveNotesKeys(imageNotes.map((note)=>(note.noteKey)));
-    }
-    const deactivateAllNotes = ()=>{
-        setActiveNotesKeys([]);
-    }
-    
     const createNoteRow = (note) =>{
         return(
             <NotesFilterRow
@@ -47,8 +42,8 @@ export const NotesFilter = ({imageNotes, activeNotesKeys, setActiveNotesKeys})=>
                         <ModalBody>
                             <>
                                 <div className='activation__buttons--div'>
-                                    <button type='button' className='btn btn-primary' onClick={()=>{activateAllNotes()}}>Activate all notes</button>
-                                    <button type='button' className='btn btn-secondary' onClick={()=>{deactivateAllNotes()}}>Deactivate all notes</button>
+                                    <ActivateAllNotesButton imageNotes = {imageNotes} setActiveNotesKeys = {setActiveNotesKeys} />
+                                    <DeactivateAllNotesButton setActiveNotesKeys={setActiveNotesKeys} />
                                 </div>
                                 <Table
                                     tableLabels= {["Select", "Title", "Text"]}

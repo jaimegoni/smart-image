@@ -8,7 +8,7 @@ import { getStoredImageByKey } from "../../../core/services/ImagesRegister/GetSt
 import { StandardView } from "../../templates/StandardView/StandardView";
 
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { NotesFilter } from "../../components/NotesFilter/NotesFilter";
+import { ActivateAllNotesButton, DeactivateAllNotesButton, NotesFilter } from "../../components/SmartImages";
 import { VisualizationSmartImage } from "../../components/SmartImages";
 
 
@@ -52,7 +52,7 @@ export const SmartImageView = ()=>{
                     <div className="title__container--div">
                         <h2>Image name: {imageData.imageName}</h2>
                     </div>
-                    <div className="actions__container--div">
+                    <div className="pagination__container--div">
                         <Link to={`/smartImage/${imageKey}`} className="btn btn-primary">
                             View
                         </Link>
@@ -60,11 +60,15 @@ export const SmartImageView = ()=>{
                             Configuration
                         </Link>
                     </div>
-                    <NotesFilter
-                        imageNotes={imageData.imageNotes}
-                        activeNotesKeys={activeNotesKeys}
-                        setActiveNotesKeys={setActiveNotesKeys}
-                    />
+                    <div className="notes_activation--div">
+                        <NotesFilter
+                            imageNotes={imageData.imageNotes}
+                            activeNotesKeys={activeNotesKeys}
+                            setActiveNotesKeys={setActiveNotesKeys}
+                        />
+                        <ActivateAllNotesButton imageNotes = {imageData.imageNotes} setActiveNotesKeys = {setActiveNotesKeys} />
+                        <DeactivateAllNotesButton setActiveNotesKeys = {setActiveNotesKeys} />
+                    </div>
                     <div className="image__container--div">
                         <VisualizationSmartImage
                             imageData = {imageData}

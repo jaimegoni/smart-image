@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './NotesFilter.css';
 
-import { Tr, Td } from '../Table/';
+import { Tr, Td } from '../../Table';
 
 export const NotesFilterRow = ({note, activeNotesKeys, setActiveNotesKeys})=>{
 
