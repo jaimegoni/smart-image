@@ -15,6 +15,7 @@ export const NavigationBar = ()=>{
 
             <div className="navigation__bar--div">
                 <Link className="navigation__link--a" to="/" target="_self">Home</Link>
+                <Link className="navigation__link--a" to="/usage" target="_self">Usage</Link>
                 <Link className="navigation__link--a" to="/faq" target="_self">FAQ</Link>
             </div>
     </nav>

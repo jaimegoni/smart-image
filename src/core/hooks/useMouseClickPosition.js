@@ -59,6 +59,8 @@ export const useMouseClickPosition = (IdOfElementToInteractWith, onMouseDownCall
 
     const onMouseMove = (event) =>{
         if (isClicking){
+
+
             setCurrentCoordinates(
                 {
                     xCurrent: Math.round(event.pageX),

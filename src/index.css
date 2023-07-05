@@ -20,3 +20,14 @@ h1{
 h2{
   font-size: 2em;
 }
+
+p{
+  margin: 0.25em;
+}
+ul {
+  list-style-type: circle;
+  margin-left: 1.5em;
+}
+li{
+  margin: 0.25em;
+}

@@ -45,6 +45,19 @@ export const FaqView = ()=>{
                 <p>You can see the original code at:</p>
                 <br/>
                 <a href={githubProjectUrl} target="_blank" rel="noreferrer">{githubProjectUrl}</a>
+                <br/><br/><br/>
+
+                <h2 >Project dependencies</h2>
+                <hr/>
+                <p>This page is styled with Booststrap 5.</p>
+                <p>The project has the following external dependencies:</p>
+                <ul>
+                    <li>React 18.2.0.</li>
+                    <li>react-router-dom 6.10.0.</li>
+                    <li>tesseract.js 4.1.1: text recognition.</li>
+                    <li>file-saver 2.0.5: dowload files.</li>
+                    <li>jszip 3.10.1: compress files in a zip folder.</li>
+                </ul>
             </>
         </StandardView>
     )

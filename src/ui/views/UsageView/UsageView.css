@@ -1,0 +1,19 @@
+
+.example__image--div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.example__image--img{
+
+    max-width: 30%;
+    border: 1px solid blue;
+    margin: 1em;
+}
+
+.note__write--video{
+    border: 1px solid purple;
+    margin: 1em;
+}
