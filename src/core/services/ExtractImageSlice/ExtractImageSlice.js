@@ -13,8 +13,6 @@ export const extractImageSlice = async(imageSrc, initialX, initialY, width, heig
         ctx.drawImage(img,initialX, initialY, width, height, 0, 0, width, height);
         slicedImage = cnvs.toDataURL('image/jpeg');
         cnvs.remove();
-
-        console.log(slicedImage);
         hasFinishedSlicing = true;
     }
 

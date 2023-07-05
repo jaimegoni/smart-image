@@ -1,4 +1,6 @@
 
+import { useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 
 import { saveNote } from '../../../../core/services/NotesSavingAndModifying';
@@ -6,24 +8,35 @@ import { calculateSquareNaturalCoordinates } from '../../../../core/services/Rel
 
 import { CreationSquare, CreationForm } from './Components';
 
+import { useRecognizeImage } from '../../../../core/hooks/useRecognizeImage';
+import { extractImageSlice } from '../../../../core/services/ExtractImageSlice/ExtractImageSlice';
 
-export const CreationNote = ({ initialX, initialY, finalX, finalY, divImageParameters, imageData, setImageData, setShowCreationNote })=>{
+
+
+export const CreationNote = ({ initialX, initialY, finalX, finalY, divImageParameters, imageData, setImageData, setShowCreationNote, allowTextRecon })=>{
+
+    const [{isRecognizing, hasError, recognizedText}, setFile] = useRecognizeImage();
+
+    const calculateNaturalCoordinates = ()=>{
+        const [xNaturalInitial, yNaturalInitial, xNaturalFinal, yNaturalFinal] = calculateSquareNaturalCoordinates(
+            initialX,
+            initialY,
+            finalX,
+            finalY,
+            divImageParameters.xOffset,
+            divImageParameters.yOffset,
+            divImageParameters.width,
+            divImageParameters.height,
+            imageData.imageWidth,
+            imageData.imageHeight
+        )
+        return [xNaturalInitial, yNaturalInitial, xNaturalFinal, yNaturalFinal]
+    }
 
     const onSaveNote = (noteTitle, noteText)=>{
 
         if (!(noteTitle === "")){
-            const [xNaturalInitial, yNaturalInitial, xNaturalFinal, yNaturalFinal] = calculateSquareNaturalCoordinates(
-                initialX,
-                initialY,
-                finalX,
-                finalY,
-                divImageParameters.xOffset,
-                divImageParameters.yOffset,
-                divImageParameters.width,
-                divImageParameters.height,
-                imageData.imageWidth,
-                imageData.imageHeight
-            )
+            const [xNaturalInitial, yNaturalInitial, xNaturalFinal, yNaturalFinal] = calculateNaturalCoordinates();
     
             const newImageData = saveNote(
                 imageData,
@@ -41,6 +54,16 @@ export const CreationNote = ({ initialX, initialY, finalX, finalY, divImageParam
         
     }
 
+    useEffect(()=>{
+        if(allowTextRecon){
+            const [xNaturalInitial, yNaturalInitial, xNaturalFinal, yNaturalFinal] = calculateNaturalCoordinates();
+
+            extractImageSlice(imageData.b64image, xNaturalInitial, yNaturalInitial, (xNaturalFinal-xNaturalInitial), (yNaturalFinal-yNaturalInitial))
+                .then((imgSrc)=>{setFile(imgSrc)});
+            
+        }
+    },[]);
+
     return(
         <>
             <CreationSquare
@@ -54,6 +77,8 @@ export const CreationNote = ({ initialX, initialY, finalX, finalY, divImageParam
                 yPosition = { initialY }
                 onSaveNote = { onSaveNote }
                 setShowCreationNote = { setShowCreationNote }
+                isRecognizingTitle = {isRecognizing}
+                recognizedTitle = {recognizedText}
             />
         </>
     )
@@ -75,5 +100,6 @@ CreationNote.propTypes = {
     ),
     imageData: PropTypes.object.isRequired,
     setImageData: PropTypes.func.isRequired,
-    setShowCreationNote: PropTypes.func.isRequired
+    setShowCreationNote: PropTypes.func.isRequired,
+    allowTextRecon: PropTypes.bool.isRequired
 }

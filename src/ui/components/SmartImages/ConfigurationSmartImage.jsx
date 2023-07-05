@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 
+import './ConfigurationSmartImage.css';
+
 import { useMouseClickPosition } from "../../../core/hooks/useMouseClickPosition"
 import { DivImage } from "./DivImage/DivImage";
 import { DraggingSquare } from "./ImageNotes/Components";
@@ -19,7 +21,7 @@ export const ConfigurationSmartImage = ({imageData, setImageData})=>{
     const [maxImageDisplayWidth, setMaxImageDisplayWidth] = useState(Math.min(screenWidthFactor*screenWidth, imageData.imageWidth));
     const [displayWidth, setDisplayWidth] = useState(maxImageDisplayWidth);
 
-    const [allowTextRecon, setAllowTextRecon] = useState(false);
+    const [allowTextRecon, setAllowTextRecon] = useState(true);
     const [showCreationNote, setShowCreationNote] = useState(false);
     const [divImageParameters, setDivImageParameters] = useState(
         {
@@ -92,12 +94,15 @@ export const ConfigurationSmartImage = ({imageData, setImageData})=>{
     return(
         <>
         
-        <WidthInput
-                displayWidth = {displayWidth}
-                setDisplayWidth = {setDisplayWidth}
-                maxImageDisplayWidth = {maxImageDisplayWidth}
-            />
-        <SliderSwitch active={allowTextRecon} setActive={setAllowTextRecon}/>
+        <div className="image__actions--div">
+            <WidthInput
+                    displayWidth = {displayWidth}
+                    setDisplayWidth = {setDisplayWidth}
+                    maxImageDisplayWidth = {maxImageDisplayWidth}
+                />
+                <label style={{marginLeft: "1em", marginRight:"0.5em"}}>Allow text recognition</label>
+            <SliderSwitch active={allowTextRecon} setActive={setAllowTextRecon}/>
+        </div>
         <DivImage
             imgContainerId = {imgContainerId}
             imageData = {imageData}
@@ -126,6 +131,7 @@ export const ConfigurationSmartImage = ({imageData, setImageData})=>{
                     imageData = {imageData}
                     setImageData = {setImageData}
                     setShowCreationNote = {setShowCreationNote}
+                    allowTextRecon = {allowTextRecon}
                 />
             }
             {

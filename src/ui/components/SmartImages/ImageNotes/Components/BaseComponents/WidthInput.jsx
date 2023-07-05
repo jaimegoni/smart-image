@@ -14,7 +14,7 @@ export const WidthInput = ({displayWidth, setDisplayWidth, maxImageDisplayWidth}
                 min={Math.round(maxImageDisplayWidth/4)}
                 max={maxImageDisplayWidth}
                 value={displayWidth}
-                onChange={(event)=>{setDisplayWidth(event.target.value)}}
+                onChange={(event)=>{setDisplayWidth(Number(event.target.value))}}
             />
         </div>
     )

@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 
 import { recognizeImage } from "../infrastructure/Tesseract/RecognizeImage";
 
-export const useRecognizeImage = (file, language = "eng") =>{
+export const useRecognizeImage = (language = "eng") =>{
 
+    const [file, setFile] = useState(undefined);
     const [isRecognizing, setIsRecognizing] = useState(false);
     const [hasError, setHasError] = useState(false);
     const [recognizedText, setRecognizedText] = useState("");
@@ -16,7 +17,7 @@ export const useRecognizeImage = (file, language = "eng") =>{
             recognizeImage(file)
                 .then(
                     (text)=>{
-                        setRecognizedText(text, language);
+                        setRecognizedText(text);
                         setIsRecognizing(false);
                     }
                 )
@@ -29,5 +30,5 @@ export const useRecognizeImage = (file, language = "eng") =>{
     }
     ,[file, language])
 
-    return([isRecognizing, hasError, recognizedText]);
+    return([{isRecognizing, hasError, recognizedText}, setFile]);
 }
