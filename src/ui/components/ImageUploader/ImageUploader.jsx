@@ -8,6 +8,7 @@ export const ImageUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "im
     const inputId = "dropzoneInput"
 
     const [isDraggedOver, setIsDraggedOver] = useState(false)
+    const [fileUploadError, setFileUploadError] = useState("");
 
     const handleFileDrop = (event) =>{
 
@@ -30,10 +31,20 @@ export const ImageUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "im
         }
 
         if(acceptedTypes.includes(droppedFile.type)){
-            const dataTransfer = new DataTransfer();
-            dataTransfer.items.add(droppedFile);
-            document.getElementById(inputId).files = dataTransfer.files;
-            setFile(droppedFile);
+            if  (droppedFile.size < 1048576){
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(droppedFile);
+                document.getElementById(inputId).files = dataTransfer.files;
+                setFile(droppedFile);
+                setFileUploadError("");
+            }
+            else{
+                setFileUploadError("Error: file size is bigger than 1 MB. Please, reduce the size of the file.");
+            }
+
+        }
+        else{
+            setFileUploadError("Error: File type not accepted.");
         }
 
     }
@@ -61,10 +72,18 @@ export const ImageUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "im
     const onInputChange = (event)=>{
         if (event.target.files[0]){
             if(acceptedTypes.includes(event.target.files[0].type)){
-                setFile(event.target.files[0]);
+
+                if  (event.target.files[0].size < 1048576){
+                    setFile(event.target.files[0]);
+                    setFileUploadError("");
+                }
+                else{
+                    setFileUploadError("Error: file size is bigger than 1 MB. Please, reduce the size of the file.");
+                }
             }
             else{
                 event.target.value = "";
+                setFileUploadError("Error: File type not accepted.");
             }
         }
     }
@@ -82,7 +101,15 @@ export const ImageUploader = ({file, setFile, acceptedTypes = ["image/jpeg", "im
                     <p>Drag and drop image</p>
                     <p>or</p>
                     <input id={inputId} type="file" onChange={onInputChange} accept={acceptedTypesToString()}/>
+                    <p style={{fontSize:"0.75em"}}>Max size: 1 MB</p>
                 </div>
+            </div>
+            <div>
+                {
+                    !(fileUploadError === "")
+                        &&
+                    <p style={{color:"red"}}>{fileUploadError}</p>
+                }
             </div>
             {
                 !(file === null)
