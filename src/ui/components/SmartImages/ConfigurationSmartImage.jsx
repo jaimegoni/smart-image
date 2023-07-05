@@ -8,6 +8,7 @@ import { DraggingSquare } from "./ImageNotes/Components";
 import { CreationNote } from "./ImageNotes/CreationNote";
 import { ConfigurationNote } from "./ImageNotes/ConfigurationNote";
 import { WidthInput } from "./ImageNotes/Components";
+import { SliderSwitch } from "../SliderSwitch/SliderSwitch";
 
 export const ConfigurationSmartImage = ({imageData, setImageData})=>{
 
@@ -18,6 +19,7 @@ export const ConfigurationSmartImage = ({imageData, setImageData})=>{
     const [maxImageDisplayWidth, setMaxImageDisplayWidth] = useState(Math.min(screenWidthFactor*screenWidth, imageData.imageWidth));
     const [displayWidth, setDisplayWidth] = useState(maxImageDisplayWidth);
 
+    const [allowTextRecon, setAllowTextRecon] = useState(false);
     const [showCreationNote, setShowCreationNote] = useState(false);
     const [divImageParameters, setDivImageParameters] = useState(
         {
@@ -95,6 +97,7 @@ export const ConfigurationSmartImage = ({imageData, setImageData})=>{
                 setDisplayWidth = {setDisplayWidth}
                 maxImageDisplayWidth = {maxImageDisplayWidth}
             />
+        <SliderSwitch active={allowTextRecon} setActive={setAllowTextRecon}/>
         <DivImage
             imgContainerId = {imgContainerId}
             imageData = {imageData}

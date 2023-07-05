@@ -23,13 +23,7 @@ export const NotesFilterRow = ({note, activeNotesKeys, setActiveNotesKeys})=>{
             <Td
                 key={`td_${note.noteKey}_${0}`}
             >
-                {
-                    activeNotesKeys.includes(note.noteKey)
-                            ?
-                    <input type='checkbox' checked onChange={toggleActiveNote}/>
-                            :
-                    <input type='checkbox' onChange={toggleActiveNote}/>
-                }
+                <input type='checkbox' checked={activeNotesKeys.includes(note.noteKey)} onChange={toggleActiveNote}/>
             </Td>
             <Td
                 key={`td_${note.noteKey}_${1}`}
