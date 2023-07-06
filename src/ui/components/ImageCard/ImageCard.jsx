@@ -31,12 +31,12 @@ export const ImageCard = ({imageInfo})=>{
                     :
             <div className="image__card--div">
                 <div className="image__actions--div">
-                    <a  className="image__card--download" target="_blank" rel="noreferrer" href={objectToDownloadLink(imageInfo)} download={imageInfo.imageName + ".json"}><img src="/images/download_icon.png" alt="downloadIcon" className="image__download--img"/></a>
+                    <a  className="image__card--download" target="_blank" rel="noreferrer" href={objectToDownloadLink(imageInfo)} download={imageInfo.imageName + ".json"}><img src="./images/download_icon.png" alt="downloadIcon" className="image__download--img"/></a>
                     <button onClick={onDeleteImage} className="image__card--del">🗑</button>
                 </div>
 
                 <Link
-                    to={`smartImage/${imageInfo.key}`}
+                    to={`/smart-image/smartImage/${imageInfo.key}`}
                     className="image__card--a"
                     title={imageInfo.imageName}
                 >

@@ -1,0 +1,56 @@
+{
+  "hash": "101be88b",
+  "browserHash": "b46aa1ff",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "0ce33f98",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "cb5bd469",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "3f4d28b7",
+      "needsInterop": false
+    },
+    "prop-types": {
+      "src": "../../node_modules/prop-types/index.js",
+      "file": "prop-types.js",
+      "fileHash": "7cbce8a5",
+      "needsInterop": true
+    },
+    "file-saver": {
+      "src": "../../node_modules/file-saver/dist/FileSaver.min.js",
+      "file": "file-saver.js",
+      "fileHash": "ace1abd4",
+      "needsInterop": true
+    },
+    "jszip": {
+      "src": "../../node_modules/jszip/dist/jszip.min.js",
+      "file": "jszip.js",
+      "fileHash": "afa02b2a",
+      "needsInterop": true
+    },
+    "tesseract.js": {
+      "src": "../../node_modules/tesseract.js/src/index.js",
+      "file": "tesseract__js.js",
+      "fileHash": "cf90ce28",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-32AJJKBB": {
+      "file": "chunk-32AJJKBB.js"
+    },
+    "chunk-HYZYPRER": {
+      "file": "chunk-HYZYPRER.js"
+    }
+  }
+}

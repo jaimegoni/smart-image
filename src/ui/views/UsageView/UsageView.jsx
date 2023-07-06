@@ -14,7 +14,7 @@ export const UsageView = ()=>{
                 <hr/>
                 <p>The original purpose of this website was: given a plan with multiple drawings of different references, have a tool to quickly find a reference and see its graphic representation.</p>
                 <div className="example__image--div">
-                    <img src="/images/text_recon_example.PNG" alt="exampleImage" className="example__image--img"/>
+                    <img src="./images/text_recon_example.PNG" alt="exampleImage" className="example__image--img"/>
                 </div>
                 <br/><br/><br/>
 
@@ -24,15 +24,15 @@ export const UsageView = ()=>{
                 <p>Files have a limit size of 1MB. They are stored in the local memory of your browser, and this local memory has a size limit.</p>
                 <p>To upload an image, click on its button on the home page:</p>
                 <div className="example__image--div">
-                    <img src="/images/uploadButtonExample.png" alt="uploadButtonExample" className="example__image--img"/>
+                    <img src="./images/uploadButtonExample.png" alt="uploadButtonExample" className="example__image--img"/>
                 </div>
                 <p>Give the image a name and upload a file by dragging and dropping or selecting a file:</p>
                 <div className="example__image--div">
-                    <img src="/images/uploadModalExample.png" alt="uploadModalExample" className="example__image--img"/>
+                    <img src="./images/uploadModalExample.png" alt="uploadModalExample" className="example__image--img"/>
                 </div>
                 <p>After introducing the information, it is possible to delete the image and change it, or continue to the next step:</p>
                 <div className="example__image--div">
-                    <img src="/images/uploadModalExample2.png" alt="uploadModalExample2" className="example__image--img"/>
+                    <img src="./images/uploadModalExample2.png" alt="uploadModalExample2" className="example__image--img"/>
                 </div>
 
 
@@ -48,13 +48,13 @@ export const UsageView = ()=>{
                     <li>Select whether to auto-detect the text when writing a note.</li>
                 </ul>
                 <div className="example__image--div">
-                    <img src="/images/configurationPage.PNG" alt="configurationPage" className="example__image--img"/>
+                    <img src="./images/configurationPage.PNG" alt="configurationPage" className="example__image--img"/>
                 </div>
                 <p>Notes can be written by clicking and dragging the mouse over the image, from left to right side, from top to the bottom.</p>
                 
                 <div className="example__image--div">
                     <video width="600" controls className="note__write--video">
-                        <source src="/videos/text_recon.mp4" type="video/mp4"/>
+                        <source src="./videos/text_recon.mp4" type="video/mp4"/>
                         Your browser does not support HTML video.
                     </video>
                 </div>
@@ -72,11 +72,11 @@ export const UsageView = ()=>{
                     <li>Use a filter to select the specific notes to show.</li>
                 </ul>
                 <div className="example__image--div">
-                    <img src="/images/viewExample.png" alt="viewExample" className="example__image--img"/>
+                    <img src="./images/viewExample.png" alt="viewExample" className="example__image--img"/>
                 </div>
                 <p>When clicking on the filter note&apos;s button, a modal with a table shows up. Here the user can filter by a keyword and select those notes wanted to be shown.</p>
                 <div className="example__image--div">
-                    <img src="/images/filterExample.png" alt="filterExample" className="example__image--img"/>
+                    <img src="./images/filterExample.png" alt="filterExample" className="example__image--img"/>
                 </div>
 
                 <br/><br/><br/>
@@ -87,7 +87,7 @@ export const UsageView = ()=>{
                 <p>Smart images are downloaded as a .json file and can be uploaded only in this format.</p>
                 <p>The option of deleting the images one by one or all together has also been included.</p>
                 <div className="example__image--div">
-                    <img src="/images/otherActions.png" alt="otherActions" className="example__image--img"/>
+                    <img src="./images/otherActions.png" alt="otherActions" className="example__image--img"/>
                 </div>
 
             </>
