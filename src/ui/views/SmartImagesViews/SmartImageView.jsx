@@ -53,10 +53,10 @@ export const SmartImageView = ()=>{
                         <h2>Image name: {imageData.imageName}</h2>
                     </div>
                     <div className="pagination__container--div">
-                        <Link to={`/smartImage/${imageKey}`} className="btn btn-primary">
+                        <Link to={`/smart-image/smartImage/${imageKey}`} className="btn btn-primary">
                             View
                         </Link>
-                        <Link to={`/smartImageConfiguration/${imageKey}`} className="btn btn-outline-primary" style={{marginLeft : "1em"}}>
+                        <Link to={`/smart-image/smartImageConfiguration/${imageKey}`} className="btn btn-outline-primary" style={{marginLeft : "1em"}}>
                             Configuration
                         </Link>
                     </div>

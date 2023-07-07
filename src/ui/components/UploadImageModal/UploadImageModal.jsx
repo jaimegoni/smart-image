@@ -35,7 +35,7 @@ export const UploadImageModal = ({setIsModalActive})=>{
 
     const toNextStep = ()=>{
         const imageKey = storeNewImage(imageInfo);
-        navigate("/smartImageConfiguration/"+imageKey);
+        navigate("/smart-image/smartImageConfiguration/"+imageKey);
     }
 
     useEffect(
