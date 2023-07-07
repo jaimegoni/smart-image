@@ -36,7 +36,7 @@ export const ImageCard = ({imageInfo})=>{
                 </div>
 
                 <Link
-                    to={`/smart-image/smartImage/${imageInfo.key}`}
+                    to={`/smartImage/${imageInfo.key}`}
                     className="image__card--a"
                     title={imageInfo.imageName}
                 >

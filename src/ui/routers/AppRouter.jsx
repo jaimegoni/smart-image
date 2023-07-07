@@ -10,12 +10,12 @@ export const AppRouter = ()=>{
 
     return(
     <Routes>
-        <Route path="/smart-image/" element={<HomeView/>}/>
-        <Route path="/smart-image/usage" element={<UsageView/>}/>
-        <Route path="/smart-image/faq" element={<FaqView/>}/>
+        <Route path="/" element={<HomeView/>}/>
+        <Route path="/usage" element={<UsageView/>}/>
+        <Route path="/faq" element={<FaqView/>}/>
         <Route path="*" element={<NoRouteView/>}/>
-        <Route path="/smart-image/smartImage/:imageKey" element={<SmartImageView/>}/>
-        <Route path="/smart-image/smartImageConfiguration/:imageKey" element={<SmartImageConfigView/>}/>
+        <Route path="/smartImage/:imageKey" element={<SmartImageView/>}/>
+        <Route path="/smartImageConfiguration/:imageKey" element={<SmartImageConfigView/>}/>
     </Routes>
     );
 }

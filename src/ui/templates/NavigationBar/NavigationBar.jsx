@@ -14,9 +14,9 @@ export const NavigationBar = ()=>{
             </div>
 
             <div className="navigation__bar--div">
-                <Link className="navigation__link--a" to="/smart-image/" target="_self">Home</Link>
-                <Link className="navigation__link--a" to="/smart-image/usage" target="_self">Usage</Link>
-                <Link className="navigation__link--a" to="/smart-image/faq" target="_self">FAQ</Link>
+                <Link className="navigation__link--a" to="/" target="_self">Home</Link>
+                <Link className="navigation__link--a" to="/usage" target="_self">Usage</Link>
+                <Link className="navigation__link--a" to="/faq" target="_self">FAQ</Link>
             </div>
     </nav>
 )

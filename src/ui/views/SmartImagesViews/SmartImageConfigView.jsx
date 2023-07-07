@@ -50,10 +50,10 @@ export const SmartImageConfigView = ()=>{
                         <h2>Image name: {imageData.imageName}</h2>
                     </div>
                     <div className="actions__container--div">
-                        <Link to={`/smart-image/smartImage/${imageKey}`} className="btn btn-outline-primary">
+                        <Link to={`/smartImage/${imageKey}`} className="btn btn-outline-primary">
                             View
                         </Link>
-                        <Link to={`/smart-image/smartImageConfiguration/${imageKey}`} className="btn btn-primary" style={{marginLeft : "1em"}}>
+                        <Link to={`/smartImageConfiguration/${imageKey}`} className="btn btn-primary" style={{marginLeft : "1em"}}>
                             Configuration
                         </Link>
 
