@@ -2,9 +2,12 @@
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 
+import './ConfigurationSmartImage.css';
+
 import { DivImage } from "./DivImage/DivImage";
 import { VisualizationNote } from './ImageNotes/VisualizationNote'
 import { WidthInput } from "./ImageNotes/Components";
+import { SliderSwitch } from "../SliderSwitch/SliderSwitch";
 
 export const VisualizationSmartImage = ({imageData, activeNotesKeys, setActiveNotesKeys})=>{
 
@@ -14,6 +17,7 @@ export const VisualizationSmartImage = ({imageData, activeNotesKeys, setActiveNo
     const [screenWidth, setScreenWidth] = useState(screen.width);
     const [maxImageDisplayWidth, setMaxImageDisplayWidth] = useState(Math.min(screenWidthFactor*screenWidth, imageData.imageWidth));
     const [displayWidth, setDisplayWidth] = useState(maxImageDisplayWidth);
+    const [displayNotes, setDisplayNotes] = useState(true);
 
     const [divImageParameters, setDivImageParameters] = useState(
         {
@@ -66,11 +70,17 @@ export const VisualizationSmartImage = ({imageData, activeNotesKeys, setActiveNo
 
     return(
         <>
-            <WidthInput
-                displayWidth = {displayWidth}
-                setDisplayWidth = {setDisplayWidth}
-                maxImageDisplayWidth = {maxImageDisplayWidth}
-            />
+            <div className="image__actions--div">
+                <WidthInput
+                    displayWidth = {displayWidth}
+                    setDisplayWidth = {setDisplayWidth}
+                    maxImageDisplayWidth = {maxImageDisplayWidth}
+                />
+                <label style={{marginLeft: "1em", marginRight:"0.5em"}}>Display notes when active</label>
+                <SliderSwitch
+                    active={displayNotes} setActive={setDisplayNotes}
+                />
+            </div>
             <DivImage
                 imgContainerId = {imgContainerId}
                 imageData = {imageData}
@@ -87,6 +97,7 @@ export const VisualizationSmartImage = ({imageData, activeNotesKeys, setActiveNo
                             divImageParameters = {divImageParameters}
                             activeNotesKeys = {activeNotesKeys}
                             setActiveNotesKeys = {setActiveNotesKeys}
+                            displayNotes = {displayNotes}
                         />
                     )
                     )

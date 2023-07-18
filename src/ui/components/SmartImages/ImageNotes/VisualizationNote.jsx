@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { VisualizationSquare, Note } from "./Components";
 import { calculateSquareDisplayCoordinates } from '../../../../core/services/RelativePositioningCalculations';
 
-export const VisualizationNote = ({imageData, imageNote, divImageParameters, activeNotesKeys, setActiveNotesKeys})=>{
+export const VisualizationNote = ({imageData, imageNote, divImageParameters, activeNotesKeys, setActiveNotesKeys, displayNotes})=>{
 
     const [{ initialX, initialY, finalX, finalY }, setSquareCoordinates] = useState(
         {
@@ -65,9 +65,10 @@ export const VisualizationNote = ({imageData, imageNote, divImageParameters, act
                 yFinal = { finalY }
                 isActive = {isNoteActive}
                 setIsActive = {setNoteActive}
+                imageNote = {imageNote}
             />
             {
-                isNoteActive
+                (isNoteActive && displayNotes)
                     &&
                 <Note
                 xPosition = { finalX + 10}
@@ -92,5 +93,6 @@ VisualizationNote.propTypes = {
         }
     ),
     activeNotesKeys: PropTypes.array.isRequired,
-    setActiveNotesKeys: PropTypes.func.isRequired
+    setActiveNotesKeys: PropTypes.func.isRequired,
+    displayNotes: PropTypes.bool.isRequired
 }

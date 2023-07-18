@@ -99,8 +99,8 @@ export const ConfigurationSmartImage = ({imageData, setImageData})=>{
                     displayWidth = {displayWidth}
                     setDisplayWidth = {setDisplayWidth}
                     maxImageDisplayWidth = {maxImageDisplayWidth}
-                />
-                <label style={{marginLeft: "1em", marginRight:"0.5em"}}>Allow text recognition</label>
+            />
+            <label style={{marginLeft: "1em", marginRight:"0.5em"}}>Allow text recognition</label>
             <SliderSwitch active={allowTextRecon} setActive={setAllowTextRecon}/>
         </div>
         <DivImage

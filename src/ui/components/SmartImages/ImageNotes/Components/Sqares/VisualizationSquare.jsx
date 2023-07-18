@@ -5,7 +5,7 @@ import "./Squares.css";
 
 import { LocationSquare } from "../BaseComponents/LocationSquare";
 
-export const VisualizationSquare = ({xInitial, yInitial, xFinal, yFinal, isActive, setIsActive})=>{
+export const VisualizationSquare = ({xInitial, yInitial, xFinal, yFinal, isActive, setIsActive, imageNote})=>{
 
     return(
             <LocationSquare
@@ -15,6 +15,7 @@ export const VisualizationSquare = ({xInitial, yInitial, xFinal, yFinal, isActiv
                 yCurrent = {yFinal}
                 className={ isActive ? "active__square--div" : "visualization__square--div"}
                 onClickFunction={()=>{setIsActive(!(isActive));}}
+                imageNote={imageNote}
             />
         )
 }
@@ -25,5 +26,6 @@ VisualizationSquare.propTypes = {
     xFinal : PropTypes.number.isRequired,
     yFinal : PropTypes.number.isRequired,
     isActive : PropTypes.bool.isRequired,
-    setIsActive : PropTypes.func.isRequired
+    setIsActive : PropTypes.func.isRequired,
+    imageNote: PropTypes.object
 }

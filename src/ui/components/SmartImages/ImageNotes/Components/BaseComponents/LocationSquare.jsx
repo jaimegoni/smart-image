@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import './LocationSquare.css';
 
-export const LocationSquare = ({xInitial, yInitial, xCurrent, yCurrent, className, onClickFunction})=>{
+export const LocationSquare = ({xInitial, yInitial, xCurrent, yCurrent, className, onClickFunction, imageNote={}})=>{
 
     const defaultStyle = {
         "display": "none",
@@ -42,7 +42,8 @@ export const LocationSquare = ({xInitial, yInitial, xCurrent, yCurrent, classNam
     if(locationSquareStyle.display === "block"){
         return(
             <div
-                className={`location__square--div ${className}`}    
+                className={`location__square--div ${className}`}
+                title={ !(Object.keys(imageNote).length === 0) ? `${ imageNote.noteTitle } ${ imageNote.noteText }` : ""}
                 style={locationSquareStyle}
                 onClick={onClickFunction}
             ></div>
@@ -60,5 +61,6 @@ LocationSquare.propTypes = {
     xCurrent : PropTypes.number.isRequired,
     yCurrent : PropTypes.number.isRequired,
     className : PropTypes.string.isRequired,
-    onClickFunction : PropTypes.func.isRequired
+    onClickFunction : PropTypes.func.isRequired,
+    imageNote : PropTypes.object
 }

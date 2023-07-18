@@ -56,6 +56,7 @@ export const ConfigurationNote = ({imageData, imageNote, divImageParameters, set
                 yFinal = { finalY }
                 isActive = {isNoteActive}
                 setIsActive = {setIsNoteActive}
+                imageNote = {imageNote}
             />
             {
                 isNoteActive

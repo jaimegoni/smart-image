@@ -8,3 +8,14 @@
 
     min-width: fit-content;
 }
+
+.note__title--h3{
+    max-width: 10em;
+    font-weight: bolder;
+    margin-bottom: 0.5em;
+}
+
+.note__title--p{
+    max-width: 10em;
+    text-align: left;
+}
